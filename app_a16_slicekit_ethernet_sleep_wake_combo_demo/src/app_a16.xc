@@ -16,8 +16,6 @@
 #include <xs1.h>
 #include <string.h>
 #include <stdlib.h>
-#include "common.h"
-#include "util.h"
 #include "webclient.h"
 #include "ethernet_board_conf.h"
 #include "debug_print.h"
@@ -40,8 +38,6 @@ on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
   ETHERNET_DEFAULT_RESET_INTERFACE_INIT
 };
 
-on tile[1]: out port ptemp = XS1_PORT_1D;
-
 /*---------------------------------------------------------------------------
  typedefs
  ---------------------------------------------------------------------------*/
@@ -61,8 +57,7 @@ server_config_t server_config = {
   501
 };
 
-char sleep_mem[XS1_SU_NUM_GLX_PER_MEMORY_BYTE];
-char ws_data_sleep[100] = "Going to Sleep...zzz";
+char ws_data_sleep[100] = "Going to sleep...zzz";
 char ws_data_wake[100] = "Rise and shine....";
 
 /*---------------------------------------------------------------------------
@@ -87,24 +82,21 @@ static void tcp_handler(chanend c_xtcp)
   if(at_pm_memory_is_valid())
   {
     // Read server configuration from sleep memory
-    at_pm_memory_read(sleep_mem);
-    copy_char_array_to_server_config(server_config, sleep_mem);
+    at_pm_memory_read(server_config);
     from_sleep = 1;
-    ptemp <: 1;
   }
   else
   {
     // Write server configuration to sleep memory
-    copy_server_config_to_char_array(server_config, sleep_mem);
-    at_pm_memory_write(sleep_mem);
+    at_pm_memory_write(server_config);
     at_pm_memory_set_valid(1);
-    ptemp <: 1;
   }
 
-  // Set webserver paramters and connect
-  webclient_set_server_ip(server_config.server_ip);
-  webclient_set_in_port(server_config.tcp_in_port);
-  webclient_set_out_port(server_config.tcp_out_port);
+  // Set webserver paramters
+  webclient_set_server_config(server_config);
+  // Init web client
+  webclient_init(c_xtcp);
+  // Connect to webserver
   webclient_connect_to_server(c_xtcp);
 
   if(from_sleep)
@@ -128,6 +120,8 @@ static void tcp_handler(chanend c_xtcp)
 
   // Inform webserver that I am going to sleep
   webclient_send_data(c_xtcp, ws_data_sleep);
+  // Close connection
+  webclient_request_close(c_xtcp);
 
   at_pm_sleep_now();
 

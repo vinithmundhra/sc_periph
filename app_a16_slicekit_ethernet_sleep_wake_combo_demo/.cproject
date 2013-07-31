@@ -185,6 +185,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.xc.compiler.input.14414582" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
@@ -325,6 +326,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.c.compiler.input.c.234383129" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -471,6 +473,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.1033448224" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>
@@ -687,6 +690,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.xc.compiler.input.980571776" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
@@ -827,6 +831,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.c.compiler.input.c.1115314549" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -973,6 +978,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_webclient/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.1164018505" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>
