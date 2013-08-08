@@ -1,7 +1,7 @@
 Peripheral Tile Support Library
 ...............................
 
-:Latest release: 1.0.0rc1
+:Latest release: 1.1.0alpha0
 :Maintainer: pthedinger
 :Description: Collection of functions to support peripheral tiles.
 
@@ -34,4 +34,6 @@ Required software (dependencies)
 ================================
 
   * sc_util (git://github.com/xcore/sc_util)
+  * sc_slicekit_support (https://github.com/xcore/sc_slicekit_support.git)
+  * sc_pwm (https://github.com/xcore/sc_pwm.git)
 

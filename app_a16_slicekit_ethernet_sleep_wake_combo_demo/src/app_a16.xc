@@ -20,7 +20,7 @@
 #include "ethernet_board_conf.h"
 #include "debug_print.h"
 #include "xtcp.h"
-#include "at_periph.h"
+#include "analog_tile_support.h"
 
 /*---------------------------------------------------------------------------
  constants
@@ -71,7 +71,7 @@ char ws_data_wake[100] = "Rise and shine....";
 /*---------------------------------------------------------------------------
  tcp_handler
  ---------------------------------------------------------------------------*/
-static void tcp_handler(chanend c_xtcp)
+static void ethernet_sleep_wake_handler(chanend c_xtcp)
 {
   timer tmr;
   int sys_start_time;
@@ -89,7 +89,7 @@ static void tcp_handler(chanend c_xtcp)
   {
     // Write server configuration to sleep memory
     at_pm_memory_write(server_config);
-    at_pm_memory_set_valid(1);
+    at_pm_memory_validate();
   }
 
   // Set webserver paramters
@@ -136,7 +136,7 @@ int main(void)
   par
   {
     on ETHERNET_DEFAULT_TILE: ethernet_xtcp_server(xtcp_ports, ipconfig, c_xtcp, 1);
-    on tile[1]: tcp_handler(c_xtcp[0]);
+    on tile[1]: ethernet_sleep_wake_handler(c_xtcp[0]);
   }
   return 0;
 }

@@ -1,9 +1,11 @@
-#include "at_periph.h"
-#define DEBUG_PRINT_ENABLE 1
+#include "debug_conf.h"
+#include "at_sleep.h"
 #include "debug_print.h"
+#include <platform.h>
+#include <xscope.h>
 
 #define RTC_TIME 1000  //Time awake in ms
-#define SLEEP_TIME 10000  //Time asleep in ms
+#define SLEEP_TIME 5000  //Time asleep in ms
 
 //function to initialise the sleep memory test array
 void init_sleep_mem(char write_val, char memory[], unsigned char size ){
@@ -27,7 +29,7 @@ void sleep_demo(void){
   //than the sleep memory. It is expected that structures for example, may be stored
   int sleep_mem_to_write[XS1_SU_NUM_GLX_PER_MEMORY_BYTE/4], sleep_mem_read[XS1_SU_NUM_GLX_PER_MEMORY_BYTE/4];
 
-  //initialise sleep memory. Two buffers - one gets written and the other is what's read back
+  //initialise sleep memory shadow. Two buffers - one gets written and the other is what's read back
   init_sleep_mem(0xed, (sleep_mem_to_write, char[]), sizeof(sleep_mem_to_write));
   init_sleep_mem(0x00, (sleep_mem_read, char[]), sizeof(sleep_mem_read));
 
@@ -38,7 +40,7 @@ void sleep_demo(void){
 	debug_printf("FAIL: Deep sleep memory incorrectly reports being valid\n",temp);
 	all_tests_passed = 0;
   }
-  at_pm_memory_set_validation(1);
+  at_pm_memory_validate(); //Set deep sleep memory status to valid
 
   if (at_pm_memory_is_valid()) debug_printf("PASS: Deep sleep memory correctly set to valid\n");
   else {
@@ -59,7 +61,7 @@ void sleep_demo(void){
   }
 
   //Try out the RTC reset and read functions
-  at_rtc_clear();
+  at_rtc_reset();
   temp = at_rtc_read();
   if (!temp) debug_printf("PASS: RTC reset to zero successfully\n");
   else {
@@ -81,7 +83,8 @@ void sleep_demo(void){
 
   if (all_tests_passed) debug_printf("PASS: All automated tests passed\n");
   else debug_printf("FAIL: One or more automated tests failed\n");
-  //The following
+
+  //The following code cannot be automated due to the chip powering down and debugger disconnecting
   at_pm_set_min_sleep_time(150); 			//Set min sleep period to about 150ms.
   alarm_time = at_rtc_read() + SLEEP_TIME;	//Calculate wakeup time
   at_pm_set_wake_time(alarm_time);			//set alarm time (wakeup)
@@ -89,21 +92,16 @@ void sleep_demo(void){
   at_pm_enable_wake_source(WAKE_PIN_HIGH);	//Enable Wake pin = high wakeup
 
   debug_printf("Going to sleep now for %u ms, alarm time = %ums\n", SLEEP_TIME, alarm_time);
-  debug_printf("Sleep test passed if sleep is observed for about 10s, or until WAKE pin goes high (XD43)\n", SLEEP_TIME, alarm_time);
+  debug_printf("Sleep test passed if sleep is observed for about %ds, or until WAKE pin goes high (Tile 0, XD43)\n", SLEEP_TIME/1000);
 
-  at_pm_sleep_now(); //Go to sleep. Debugger will disconnect after this
+  at_pm_sleep_now(); //Go to sleep. Debugger will disconnect after this due to chip being powered down
 }
 
-
-void something(void){
-   while(0);
-}
 
 int main (void)
 {
   par{
-    sleep_demo();
-    something();
+	  on tile[0]: sleep_demo();
   }
   return 0;
 }

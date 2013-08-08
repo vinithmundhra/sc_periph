@@ -9,7 +9,7 @@ TARGET = XP-SKC-U16
 APP_NAME = app_a16
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_logging module_otp_board_info module_webclient
+USED_MODULES = module_analog_tile_support module_logging module_otp_board_info module_xtcp
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

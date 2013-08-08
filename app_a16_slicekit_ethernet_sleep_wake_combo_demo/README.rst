@@ -25,7 +25,6 @@ Required Repositories
 - sc_periph https://github.com/xcore/sc_periph.git
 - sc_slicekit_support https://github.com/xcore/sc_slicekit_support.git
 - sc_util https://github.com/xcore/sc_util.git
-- sc_webclient https://github.com/xcore/sc_webclient.git
 - sc_xtcp https://github.com/xcore/sc_xtcp.git
 
 Support

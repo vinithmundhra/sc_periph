@@ -1,7 +1,7 @@
 A16 sliceKIT Ethernet Sleep Wake Combo Demo Quickstart Guide
 ============================================================
 
-This simple demonstration of xTIMEcomposer Studio functionality that uses the ``XA-SK-E100`` sliceCARD together with the xSOFTip ``module_analog_tile_support`` and ``module_webclient`` to demonstrate how the chip can be made to sleep and wake up using different sources. The app also runs a TCP web client and informs web server before going to sleep and after waking up from sleep.
+This simple demonstration of xTIMEcomposer Studio functionality that uses the ``XA-SK-E100`` sliceCARD together with the xSOFTip ``module_analog_tile_support`` and ``module_xtcp`` to demonstrate how the chip can be made to sleep and wake up using different sources. The app also runs a TCP web client and informs web server before going to sleep and after waking up from sleep.
 
 Hardware Setup
 ++++++++++++++
@@ -51,7 +51,7 @@ Note that the Developer Column in the xTIMEcomposer on the right hand side of yo
 Flash the Application
 +++++++++++++++++++++
 
-Now that the application has been compiled, the next step is to run it on the sliceKIT Core Board using the tools to load the application over JTAG into the xCORE multicore microcontroller.
+Now that the application has been compiled, the next step is to flash it on the sliceKIT Core Board using the tools to load the application over JTAG into the xCORE multicore microcontroller.
 
 - Select the file ``app_a16.xc`` in the ``app_a16_slicekit_ethernet_sleep_wake_combo_demo`` project from the Project Explorer.
 - Click on the ``Flash`` icon.
@@ -131,4 +131,4 @@ What this means is:
 Next Steps
 ++++++++++
 
-- Review the ``app_a16_slicekit_ethernet_sleep_wake_combo_demo`` application code, ``module_analog_tile_support`` module code and ``module_webclient`` library code. Refer to the documentation for each of them to see the API details and usage.
+- Review the ``app_a16_slicekit_ethernet_sleep_wake_combo_demo`` application code, ``module_analog_tile_support`` module code. Refer to the documentation for each of them to see the API details and usage.

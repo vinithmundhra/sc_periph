@@ -8,6 +8,8 @@
 
 #include <platform.h>
 #include <xccompat.h>
+#include <xs1_su.h>
+
 
 /**
  * The maximum number of ADCs available on any device.
@@ -41,24 +43,19 @@ typedef enum at_adc_bits_per_sample_t {
 
 /**
  * Configuration structure for ADCs:
- * \param input_enable          An array ints to determine which inputs are active.
- *                              Each non-zero input will be enabled.
- * \param bits_per_sample       Select how many bits to sample per ADC.
- * \param samples_per_packet    Number of samples per packet. Must be >0 and <=XS1_MAX_SAMPLES_PER_PACKET.
- * \param calibration_mode      When set the ADCs will sample a 0.8V reference
- *                              rather than the external voltage.
  */
 typedef struct {
-    char                   input_enable[XS1_MAX_NUM_ADC];
-    at_adc_bits_per_sample_t  bits_per_sample;          
-    unsigned int           samples_per_packet;       
-    int                    calibration_mode;         
-} adc_config_t;
+    char                   input_enable[XS1_MAX_NUM_ADC];   /**<An array ints to determine which inputs are active.                                                                                    Each non-zero input will be enabled.*/
+    at_adc_bits_per_sample_t  bits_per_sample;              /**<Select how many bits to sample per ADC.*/
+    unsigned int           samples_per_packet;              /**< Number of samples per packet. Must be >0 and <=XS1_MAX_SAMPLES_PER_PACKET.*/
+    int                    calibration_mode;                /**<When set the ADCs will sample a 0.8V reference 
+                                                            rather than the external voltage.*/
+} at_adc_config_t;
 
 #ifndef __XC__
-typedef const adc_config_t * const const_adc_config_ref_t;
+typedef const at_adc_config_t * const const_adc_config_ref_t;
 #else
-typedef const adc_config_t & const_adc_config_ref_t;
+typedef const at_adc_config_t & const_adc_config_ref_t;
 #endif
 
 /**
@@ -75,12 +72,12 @@ typedef const adc_config_t & const_adc_config_ref_t;
  *
  * \return ADC_OK on success and one of the return codes in adc_return_t on an error. 
  */
-void adc_enable(tileref periph_tile, chanend adc_chan, out port trigger_port, const_adc_config_ref_t config);
+void at_adc_enable(tileref periph_tile, chanend adc_chan, out port trigger_port, const_adc_config_ref_t config);
 
 /**
  * Disable all of the ADCs.
  */
-void adc_disable_all(tileref periph_tile);
+void at_adc_disable_all(tileref periph_tile);
 
 /**
  * Causes the ADC to take one sample. This function is intended to be used with
@@ -90,7 +87,7 @@ void adc_disable_all(tileref periph_tile);
  *
  * \param trigger_port The port connected to the ADC trigger pin.
  */
-void adc_trigger(out port trigger_port);
+void at_adc_trigger(out port trigger_port);
 
 /**
  * Trigger the ADC enough times to complete a packet.
@@ -98,7 +95,7 @@ void adc_trigger(out port trigger_port);
  * \param trigger_port The port connected to the ADC trigger pin.
  * \param config       The ADC ocnfiguration.
  */
-void adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config);
+void at_adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config);
 
 /**
  * A selectable function to read an ADC sample from the chanend. Any
@@ -118,7 +115,7 @@ void adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config);
 #ifdef __XC__
 #pragma select handler
 #endif
-void adc_read(chanend adc_chan, 
+void at_adc_read(chanend adc_chan, 
               const_adc_config_ref_t config,
               REFERENCE_PARAM(unsigned int, data));
 
@@ -142,7 +139,7 @@ void adc_read(chanend adc_chan,
 #ifdef __XC__
 #pragma select handler
 #endif
-void adc_read_packet(chanend adc_chan, 
+void at_adc_read_packet(chanend adc_chan, 
               const_adc_config_ref_t config,
               unsigned int data[]);
 
