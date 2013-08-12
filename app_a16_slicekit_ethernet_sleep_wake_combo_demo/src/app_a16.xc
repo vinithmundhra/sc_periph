@@ -105,14 +105,11 @@ static void ethernet_sleep_wake_handler(chanend c_xtcp)
     webclient_send_data(c_xtcp, ws_data_wake);
   }
 
-  at_watchdog_set_timeout(0xf055);
-  at_watchdog_enable();
   tmr :> sys_start_time;
   rtc_start_time =  at_rtc_read();
   tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void;
   rtc_end_time = at_rtc_read();
-  at_watchdog_set_timeout(0xf055);
-  at_watchdog_disable();
+
   alarm_time = rtc_end_time + SLEEP_TIME;
   at_pm_set_wake_time(alarm_time);
   at_pm_enable_wake_source(RTC);
