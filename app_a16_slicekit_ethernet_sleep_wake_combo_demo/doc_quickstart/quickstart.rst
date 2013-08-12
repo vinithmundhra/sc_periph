@@ -34,6 +34,16 @@ Install Python on the host computer from http://www.python.org/.
 
 Note for Mac: Have a static Ethernet IP: System Preferences -> Network -> Ethernet -> Configure IPv4: Manually. Give an IP address.
 
+To test the webserver setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
+
+#. Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``
+#. Run ``server.py``. The server IP address will be displayed in the console.
+#. Run ``test_client.py`` with server IP address as argument.
+#. The client would open, send a message to webserver close the connection, twice!
+#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the webserver setup is alright.
+
+Please note that ``test_client.py`` could be run on a different workstation provided that the two workstations are connected via a Ethernet cable.
+
 Import and Build the Application
 ++++++++++++++++++++++++++++++++
 
