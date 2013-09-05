@@ -28,9 +28,9 @@
  */
 interface i_ms_sensor
 {
-  int ms_sensor_get_button_state();       /**< Get button state */
-  int ms_sensor_get_temperature();        /**< Get temperature */
-  int ms_sensor_get_joystick_position();  /**< Get joystick position */
+  unsigned char ms_sensor_get_button_state();       /**< Get button state */
+  unsigned char ms_sensor_get_temperature();        /**< Get temperature */
+  unsigned short ms_sensor_get_joystick_position(); /**< Get joystick position */
 };
 
 /*---------------------------------------------------------------------------
