@@ -5,8 +5,19 @@
 #include <platform.h>
 
 //Macro to allow arbitrary struct/array to be passed to sleep mem functions
-//Uses XC cast (x, y) operation
+//Uses XC cast (x, y) operation. See the _impl functions below also.
+/**
+ * Reads sleep memory and copies to array/structure up to 128B
+ *
+ * \param x      Structure or array that sleep memory is copied too
+ */
 #define at_pm_memory_read(x) at_pm_memory_read_impl((x, char[]), sizeof(x))
+
+/**
+ * Reads sleep memory and copies to array/structure up to 128B
+ *
+ * \param x      Structure or array that is copied into sleep memory 
+ */
 #define at_pm_memory_write(x) at_pm_memory_write_impl((x, char[]), sizeof(x))
 
 
@@ -46,7 +57,10 @@ at_wake_sources_t;
 
 
 /** Function that writes an array of size up to 128B to sleep memory.
+ * This is the worker function that copies the array from the sleep memory.
  * Note, to pass types other than char[], please use at_pm_memory_read(x) 
+ * which is a macro that first casts the passed variable to char before 
+ * calling this function.
  *
  * \param data      reference to the charater array to be written
  *
@@ -54,8 +68,11 @@ at_wake_sources_t;
  */
 void at_pm_memory_read_impl(char data[], unsigned char size);
 
-/** Function that reads an array of size up to 128B from sleep memory.
- * Note, to pass types other than char[], please use at_pm_memory_read(x) 
+/** Function that writes an array of size up to 128B from sleep memory.
+ * This is the worker function that copies the array to the sleep memory.
+ * Note, to pass types other than char[], please use at_pm_memory_write(x)
+ * which is a macro that first casts the passed variable to char before
+ * calling this function.
  *
  * \param data      reference to the charater array to be written
  *
@@ -89,6 +106,8 @@ void at_pm_memory_invalidate(void);
  * RTC and WAKE_PIN_x may be used together however,
  * WAKE_PIN_LOW or HIGH are mutually exclusive. Ie. enabling wake
  * on WAKE_PIN_LOW will disable WAKE_PIN_HIGH and vice versa.
+ * A single wake source can only be passed at a time. To enable multiple sources,
+ * please call the function multiple times for each wake source.
  *
  * \param wake_source   enumerated type at_wake_sources_t specifying wake source to enable
  */
@@ -97,7 +116,9 @@ void at_pm_enable_wake_source(at_wake_sources_t wake_source);
 /** Function that disables the chip to be woken by specific sources
  * Each wake source type can be enabled or disabled.
  * Disabling either WAKE_PIN_LOW or WAKE_PIN_HIGH will have the same
- * effect of diabling wake from pin
+ * effect of diabling wake from pin.
+ * A single wake source can only be passed at a time. To enable multiple sources,
+ * please call the function multiple times for each wake source.
  *
  * \param wake_source   enumerated type at_wake_sources_t specifying wake source to disable
  */

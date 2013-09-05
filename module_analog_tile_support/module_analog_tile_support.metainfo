@@ -9,12 +9,12 @@ ports = {
     short   = "ADC Trigger Port",
     long    = "Port which is used to generate trigger to cause the ADCs to take samples",
     help    = "",
-    width   = 1,
-    FIXME   = "XS1_PORT_1I" 
+    width   = 32,
+    FIXME   = "XS1_PORT_32A" 
   }
 }
 
-buildResultsTarget = "XP-SKC-U16"
+buildResultsTarget = "XP-SKC-A16"
 
 channels = {}
 
@@ -23,7 +23,7 @@ function getConfigStatus()
 end
 
 generatedCode = {
-   includes = {},
+   includes = {"analog_tile_support.h"},
    globals  = "",
    body  = ""
 }

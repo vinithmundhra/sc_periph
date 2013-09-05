@@ -48,7 +48,6 @@ void sleep_demo(void){
 	all_tests_passed = 0;
   }
 
-
   //Write the sleep memory and read it back
   at_pm_memory_write(sleep_mem_to_write);
   at_pm_memory_read(sleep_mem_read);
@@ -92,7 +91,8 @@ void sleep_demo(void){
   at_pm_enable_wake_source(WAKE_PIN_HIGH);	//Enable Wake pin = high wakeup
 
   debug_printf("Going to sleep now for %u ms, alarm time = %ums\n", SLEEP_TIME, alarm_time);
-  debug_printf("Sleep test passed if sleep is observed for about %ds, or until WAKE pin goes high (Tile 0, XD43)\n", SLEEP_TIME/1000);
+  debug_printf("Sleep test PASS if sleep is observed for about %ds, or until WAKE pin goes high (Tile 0, XD43)\n", SLEEP_TIME/1000);
+  debug_printf("Hint: Measure voltage between pins 1 and 3 on XTAG analog connctor H to observe chip current\n");
 
   at_pm_sleep_now(); //Go to sleep. Debugger will disconnect after this due to chip being powered down
 }

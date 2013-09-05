@@ -1,4 +1,4 @@
-// Copyright (c) 2013, XMOS Ltd., All rights reserved
+/// Copyright (c) 2013, XMOS Ltd., All rights reserved
 // This software is freely distributable under a derivative of the
 // University of Illinois/NCSA Open Source License posted in
 // LICENSE.txt and at <http://github.xcore.com/>
@@ -60,7 +60,7 @@ void at_adc_enable(tileref periph_tile, chanend adc_chan, out port trigger_port,
     // Ensure that the global configuration is disabled, otherwise the individual ADC
     // configuration registers are read-only
     at_adc_disable_all(periph_tile);
-    
+
     // Drive trigger port low to ensure calibration pulses are all seen
     trigger_port <: 0;
 
@@ -99,9 +99,9 @@ void at_adc_trigger(out port trigger_port)
     unsigned time;
     trigger_port <: 1 @ time;
     time += 40;                 // Ensure 1 is held for >400ns
-    trigger_port @ time <: 0;
+    trigger_port @ time <: 0x80000;
     time += 40;                 // Ensure 0 is held for >400ns
-    trigger_port @ time <: 0;
+    trigger_port @ time <: 0x00000;
 }
 
 void at_adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config)

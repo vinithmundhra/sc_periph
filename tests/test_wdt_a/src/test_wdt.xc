@@ -31,7 +31,7 @@ int main (void)
   debug_printf("PASS: Disabled WDT did not kick in at %d milliseconds.\n", ((end_time - start_time)/100000));
 
   at_watchdog_enable();
-  debug_printf("If this is the last messsage you see, the test has PASSED because the watchdog reset the chip in.\n");
+  debug_printf("If this is the last messsage you see, the test has PASSED because the watchdog reset the chip OK.\n");
   tmr :> start_time;
   end_time = start_time + (WATCHDOG_PERIOD + 1) * 100000; //Wait until just before WDT overflow
   at_watchdog_kick();

@@ -1,13 +1,3 @@
-// Copyright (c) 2011, XMOS Ltd., All rights reserved
-// This software is freely distributable under a derivative of the
-// University of Illinois/NCSA Open Source License posted in
-// LICENSE.txt and at <http://github.xcore.com/>
-
-/*===========================================================================
- Info
- ----
- 
- ===========================================================================*/
 
 /*---------------------------------------------------------------------------
  include files
@@ -116,49 +106,6 @@ static int webclient_send(chanend c_xtcp, unsigned char buf[], int len)
     }
   }
   return success;
-}
-
-/*==========================================================================*/
-/**
- *  Receive data from xtcp connection.
- *
- *  \param c_xtcp   channel XTCP
- *  \param buf      character array for received data
- *  \param minlen   minimum data length to receive
- *  \return         The number of bytes received
- **/
-static int webclient_read(chanend c_xtcp, unsigned char buf[], int minlen)
-{
-  int rlen = 0;
-  int id = conn.id;
-  while(rlen < minlen)
-  {
-    slave xtcp_event(c_xtcp, conn);
-    switch(conn.event)
-    {
-      case XTCP_NEW_CONNECTION: xtcp_close(c_xtcp, conn); break;
-      case XTCP_RECV_DATA:
-      {
-        int n;
-        n = xtcp_recvi(c_xtcp, buf, rlen);
-        rlen += n;
-        break;
-      }
-      case XTCP_REQUEST_DATA:
-      case XTCP_SENT_DATA:
-      case XTCP_RESEND_DATA: xtcp_send(c_xtcp, null, 0); break;
-
-      case XTCP_TIMED_OUT:
-      case XTCP_ABORTED:
-      case XTCP_CLOSED:
-      {
-        if (conn.id == id) return -1;
-        break;
-      }
-      case XTCP_IFDOWN: return -1; break;
-    }
-  }
-  return rlen;
 }
 
 /*---------------------------------------------------------------------------

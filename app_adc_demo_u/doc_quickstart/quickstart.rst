@@ -24,8 +24,8 @@ To setup the hardware (:ref:`adc_u_example_hardware_setup`):
 
 .. _adc_u_example_hardware_setup:
 
-.. figure:: images/hw_setup.*
-   :width: 120mm
+.. figure:: images/hw_setup.jpg
+   :width: 80mm
    :align: center
 
    Hardware Setup for U-Series ADC example

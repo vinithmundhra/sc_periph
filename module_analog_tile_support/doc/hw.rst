@@ -7,7 +7,7 @@ Evaluation Platforms
 Recommended Hardware
 --------------------
 
-Slicekit
+SliceKIT
 ++++++++
 
 This module may be evaluated using the Slicekit Modular Development Platform, available from digikey. Required board SKUs are:

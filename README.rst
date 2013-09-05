@@ -2,12 +2,12 @@ Peripheral Tile Support Library
 ...............................
 
 :Latest release: 1.1.0alpha0
-:Maintainer: pthedinger
+:Maintainer: pthedinger ed-xmos
 :Description: Collection of functions to support peripheral tiles.
 
 
 The Peripheral Tile Support Library provides a set of functions and 
-datatypes which aid the use of the peripheral tiles.
+datatypes which aid the use of the xCORE peripheral tiles.
 
 Key Features
 ============
@@ -17,6 +17,14 @@ module_usb_tile_support:
 * Support for the U-Series Analog to Digital Converters (ADCs)
 
 *Note: support for USB devices is provided by the USB Device Component*
+
+module_analog_tile_support:
+ 
+* Support for the A-Series Analog to Digital Converters (ADCs)
+* Support for A-Series Watchdog Timer (WDT)
+* Library functions supporting sleep mode and the Real Time Clock (RTC)
+
+
 
 Known Issues
 ============
