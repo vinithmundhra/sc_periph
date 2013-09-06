@@ -1,7 +1,7 @@
 A16 sliceKIT Ethernet Sleep Wake Combo Demo Quickstart Guide
 ============================================================
 
-This simple demonstration of xTIMEcomposer Studio functionality that uses the ``XA-SK-E100`` sliceCARD together with the xSOFTip ``module_analog_tile_support`` and ``module_xtcp`` to demonstrate how the chip can be made to sleep and wake up using different sources. The app also runs a TCP web client and informs web server before going to sleep and after waking up from sleep.
+This simple demonstration of xTIMEcomposer Studio functionality that uses the ``XA-SK-E100`` and ``XA-SK-MIXED SIGNAL``sliceCARDs together with the xSOFTip ``module_analog_tile_support`` and ``module_xtcp`` to demonstrate how the chip can be made to sleep and wake up using different sources. The app also runs a TCP web client and informs web server before going to sleep and after waking up from sleep.
 
 Hardware Setup
 ++++++++++++++
@@ -10,16 +10,19 @@ The A16 sliceKIT Ethernet Sleep Wake Combo Demo Application requires the followi
 
 - XP-SKC-A16 sliceKIT core board.
 - XA-SK-E100 Ethernet sliceCARD
-- XTAG-2
+- XA-SK-MIXED SIGNAL sliceCARD
+- XTAG-2 & XA-SK-XTAG2 adapter board
 - Ethernet and USB cables
 - 12V DC power supply
 
 To setup the system:
 
-#. Connect the ``XTAG-2`` to sliceKIT Core board.
+#. Ensure that the room (in which is demo is presented) is well lit as in this demo the LDR will be used to detect light.
+#. Connect ``XA-SK-XTAG2`` to sliceKIT Core board and ``XTAG-2`` to the adapter board.
 #. Connect the ``XTAG-2`` to host PC using USB cable. Note that the USB cable is not provided with the sliceKIT starter kit.
 #. Connect ``XA-SK-E100`` sliceCARD to the sliceKIT Core board using the connector marked with the ``SQUARE``.
 #. Connect ``XA-SK-E100`` sliceCARD and host computer using Ethernet cable.
+#. Connect ``XA-SK-MIXED SIGNAL`` sliceCARD to the sliceKIT Core board using the connector marked with the ``A``.
 #. Switch on the power supply to the sliceKIT Core board.
 
 .. figure:: images/hardware_setup.jpg
@@ -34,13 +37,13 @@ Install Python on the host computer from http://www.python.org/.
 
 Note for Mac: Have a static Ethernet IP: System Preferences -> Network -> Ethernet -> Configure IPv4: Manually. Give an IP address.
 
-To test the webserver setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
+To test the web server setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
 
 #. Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``
 #. Run ``server.py``. The server IP address will be displayed in the console.
 #. Run ``test_client.py`` with server IP address as argument.
-#. The client would open, send a message to webserver close the connection, twice!
-#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the webserver setup is alright.
+#. The client would open, send a message to web server close the connection, twice!
+#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the web server setup is alright.
 
 Please note that ``test_client.py`` could be run on a different workstation provided that the two workstations are connected via a Ethernet cable.
 
@@ -50,7 +53,7 @@ Import and Build the Application
 #. Open xTIMEcomposer and check that it is operating in online mode. Open the edit perspective (Window->Open Perspective->XMOS Edit).
 #. Locate the ``A16 sliceKIT Ethernet Sleep Wake Combo Demo`` item in the xSOFTip pane on the bottom left of the window and drag it into the Project Explorer window in the xTIMEcomposer. This will also cause the modules on which this application depends to be imported as well.
 #. Open the file ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/app_a16.xc``
-#. Go to line:55 and change the IP address (of the web server) that the web client will try to connect to.
+#. Go to line:57 and change the IP address (of the web server) that the web client will try to connect to.
 #. Save the application using File -> Save.
 #. Click on the ``app_a16_slicekit_ethernet_sleep_wake_combo_demo`` item in the Project Explorer pane then click on the build icon (hammer) in xTIMEcomposer. Check the console window to verify that the application has built successfully.
 
@@ -72,71 +75,47 @@ Now that the application has been compiled, the next step is to flash it on the 
 The Demo
 ++++++++
 
-- Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``.
-- Double click or Run the python script: ``server.py``.
-- The following messages are displayed in the Python console::
+- Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``
+- Double click or Run the python script: ``server.py``
+- The following message is displayed in the Python console::
 
    Server Address = 169.254.202.189
-   XMOS: Going to sleep...zzz
-   Connection closed
-   XMOS: Rise and shine....
-   XMOS: Going to sleep...zzz
-   Connection closed
-   XMOS: Rise and shine....
-   XMOS: Going to sleep...zzz
-   Connection closed
-   XMOS: Rise and shine....
-   XMOS: Going to sleep...zzz
-   Connection closed
-   XMOS: Rise and shine....
-   XMOS: Going to sleep...zzz
-   Connection closed
+   *Note: This IP address may change depending on your network.*
+   
+- Wait until the following message is displayed::
 
-What this means is:
+   XMOS: Program running! Sensor events will now be recorded.
+   
+- Click (press and release) button - SW1 on the ``XA-SK-MIXED SIGNAL`` sliceCARD three times.
+- Move the joystick to some position and hold it there until this message::
 
+   XMOS: Button = 003; Temperature = 124; Joystick X = 193, Y = 223
+   (Note: the temperature and Joystick position may vary depending on the current room temperature and joystick position as held by the user).
 
-   +----------------------------------+------------------------------------------------------------+
-   | Message in Python console        | xCORE app                                                  |
-   +==================================+============================================================+
-   | Server Address = 169.254.202.189 |                                                            |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Program starts                                             |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Looks for valid server configuration in sleep memory.      |
-   |                                  | Since, this is power up, it takes the default Server       |
-   |                                  | configuration and saves it to sleep memory.                |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Initializes web client, and connects to web server         |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Starts a sleep timer                                       |
-   +----------------------------------+------------------------------------------------------------+
-   | XMOS: Going to sleep...zzz       | Timer expires, sends message to web server that it will be |
-   |                                  | going to sleep                                             |
-   +----------------------------------+------------------------------------------------------------+
-   | Connection closed                | Closes the TCP connection                                  |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Sleeps                                                     |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Wakes up upon timer expiry                                 |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Looks for valid server configuration in sleep memory. This |
-   |                                  | time it finds valid data in sleep memory. Uses this server |
-   |                                  | configuration.                                             |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Initializes web client, and connects to web server         |
-   +----------------------------------+------------------------------------------------------------+
-   | XMOS: Rise and shine....         | Informs web server that it just woke up from sleep         |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Starts a sleep timer                                       |
-   +----------------------------------+------------------------------------------------------------+
-   | XMOS: Going to sleep...zzz       | Timer expires, sends message to web server that it will be |
-   |                                  | going to sleep                                             |
-   +----------------------------------+------------------------------------------------------------+
-   | Connection closed                | Closes the TCP connection                                  |
-   +----------------------------------+------------------------------------------------------------+
-   |                                  | Sleeps                                                     |
-   +----------------------------------+------------------------------------------------------------+
+- Release the joystick.   
+- Next the following message is displayed::
+   
+   XMOS: Going to sleep.
+   Connection closed
+   
+- At this point, the chip enters sleep mode and could be woken up by two sources:
+   
+   - If the room gets dark - LDR triggers wake signal on low light
+   - The internal sleep timer expires - currently set to 1 minute
+   
+- Once woken up, the program will try to connect to the running web server, display the sensor data and go back to sleep.
 
+.. figure:: images/webserver_screenshot.png
+   :align: center
+
+   Sample messages from chip to web server
+   
+*Note:*
+
+- The web server configuration is stored in sleep memory. When the chip wakes up, the program will look in the sleep memory for valid data.
+- The sleep timer can be changed at line 25: ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/app_a16.xc``::
+   
+   #define SLEEP_TIME 60000 //Time asleep in ms
 
 Next Steps
 ++++++++++

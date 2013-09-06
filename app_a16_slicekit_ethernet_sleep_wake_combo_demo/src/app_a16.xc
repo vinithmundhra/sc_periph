@@ -21,7 +21,7 @@
 /*---------------------------------------------------------------------------
  constants
  ---------------------------------------------------------------------------*/
-#define AWAKE_TIME 5000  //Time awake in ms
+#define AWAKE_TIME 60000  //Time awake in ms
 #define SLEEP_TIME 60000  //Time asleep in ms
 
 #define WAKE_SOURCE_TIMER   1
@@ -60,6 +60,7 @@ server_config_t server_config = {
 };
 
 char ws_data_sleep[100] = "Going to sleep.";
+char ws_data_notify[100] = "Program running! Sensor events will now be recorded.";
 char ws_data_wake[100] = "Button = bbb; Temperature = ttt; Joystick X = xxx, Y = yyy";
 
 /*---------------------------------------------------------------------------
@@ -78,25 +79,6 @@ void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
 {
   unsigned char btn_state, temperature, j_x, j_y;
   unsigned short joystick_position;
-
-#if WAKE_SOURCE_TIMER
-  timer tmr;
-  int sys_start_time;
-  unsigned int rtc_start_time, rtc_end_time, alarm_time;
-
-  tmr :> sys_start_time;
-  rtc_start_time =  at_rtc_read();
-  tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void;
-  rtc_end_time = at_rtc_read();
-
-  alarm_time = rtc_end_time + SLEEP_TIME;
-  at_pm_set_wake_time(alarm_time);
-  at_pm_enable_wake_source(RTC);
-#endif // #if WAKE_SOURCE_TIMER
-
-#if WAKE_SOURCE_LDR
-  at_pm_enable_wake_source(WAKE_PIN_HIGH);
-#endif // #if WAKE_SOURCE_LDR
 
   // If just woke up fom sleep, check sleep memory for any data
   if(at_pm_memory_is_valid())
@@ -117,6 +99,27 @@ void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
   webclient_init(c_xtcp);
   // Connect to webserver
   webclient_connect_to_server(c_xtcp);
+  // Send notification to begin recording sensor data
+  webclient_send_data(c_xtcp, ws_data_notify);
+
+#if WAKE_SOURCE_TIMER
+  timer tmr;
+  int sys_start_time;
+  unsigned int rtc_start_time, rtc_end_time, alarm_time;
+
+  tmr :> sys_start_time;
+  rtc_start_time =  at_rtc_read();
+  tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void;
+  rtc_end_time = at_rtc_read();
+
+  alarm_time = rtc_end_time + SLEEP_TIME;
+  at_pm_set_wake_time(alarm_time);
+  at_pm_enable_wake_source(RTC);
+#endif // #if WAKE_SOURCE_TIMER
+
+#if WAKE_SOURCE_LDR
+  at_pm_enable_wake_source(WAKE_PIN_HIGH);
+#endif // #if WAKE_SOURCE_LDR
 
   btn_state = c_sensor.ms_sensor_get_button_state();
   temperature = c_sensor.ms_sensor_get_temperature();
@@ -125,19 +128,19 @@ void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
   j_y = (unsigned char)(joystick_position & 0xFF);
   j_x = (unsigned char)((joystick_position >> 8u) & 0xFF);
 
-  // Update string - there should be a better way to do this - like itoa()
+  // Update string
   ws_data_wake[9] = btn_state/100 + '0';
   ws_data_wake[10] = (btn_state%100)/10 + '0';
-  ws_data_wake[11] = ((btn_state%100)/10)%10 + '0';
+  ws_data_wake[11] = btn_state%10 + '0';
   ws_data_wake[28] = temperature/100 + '0';
   ws_data_wake[29] = (temperature%100)/10 + '0';
-  ws_data_wake[30] = ((temperature%100)/10)%10 + '0';
+  ws_data_wake[30] = temperature%10 + '0';
   ws_data_wake[46] = j_x/100 + '0';
   ws_data_wake[47] = (j_x%100)/10 + '0';
-  ws_data_wake[48] = ((j_x%100)/10)%10 + '0';
+  ws_data_wake[48] = j_x%10 + '0';
   ws_data_wake[55] = j_y/100 + '0';
   ws_data_wake[56] = (j_y%100)/10 + '0';
-  ws_data_wake[57] = ((j_y%100)/10)%10 + '0';
+  ws_data_wake[57] = j_y%10 + '0';
 
   // Send sensor data to web server
   webclient_send_data(c_xtcp, ws_data_wake);
