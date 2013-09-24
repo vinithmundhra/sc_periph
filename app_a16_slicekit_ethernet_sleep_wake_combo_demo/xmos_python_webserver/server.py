@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import socket
+from get_ip_address import get_ip_address
   
 server_port = 501
-self_ip = socket.gethostbyname(socket.gethostname())
+self_ip = get_ip_address()
 print('Web Server Address = %s' % self_ip)
 
 server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
