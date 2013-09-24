@@ -54,7 +54,7 @@ xtcp_ipconfig_t ipconfig = {
 };
 
 server_config_t server_config = {
-  {169, 254, 202, 189},
+  {127, 0, 1, 1},
   500,
   501
 };

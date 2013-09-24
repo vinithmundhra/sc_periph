@@ -45,7 +45,12 @@ To test the web server setup, a simple client is provided in ``$/app_a16_sliceki
 #. The client would open, send a message to web server close the connection, twice!
 #. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the web server setup is alright.
 
-Please note that ``test_client.py`` could be run on a different workstation provided that the two workstations are connected via a Ethernet cable.
+Please note 
+
+- administrator privileges may be required to run the ``server.py`` and ``test_client.py``. 
+   - For Windows: start command prompt as an administrator and then execute the python scripts.
+   - For Mac / Linux: run the scripts with *sudo*. 
+- ``test_client.py`` could be run on a different workstation provided that the two workstations are connected via a Ethernet cable.
 
 Import and Build the Application
 ++++++++++++++++++++++++++++++++
