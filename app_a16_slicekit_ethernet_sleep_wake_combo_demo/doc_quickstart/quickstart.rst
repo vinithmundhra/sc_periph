@@ -33,9 +33,11 @@ To setup the system:
 Host Computer Setup
 +++++++++++++++++++
 
-Install Python on the host computer from http://www.python.org/.
-
-Note for Mac: Have a static Ethernet IP: System Preferences -> Network -> Ethernet -> Configure IPv4: Manually. Give an IP address.
+- Install Python on the host computer from http://www.python.org/.
+- If you are planning to connect the Ethernet cable directly to your host computer's Ethernet port, it may be required to setup a static IP configuration. Please configure your wired connection IPv4 settings to provide a static IP address. For example, IP address = 169.254.186.191; Netmask = 255.255.0.0; Gateway = 255.255.255.0 
+   - For Mac: Navigate to ``System Preferences -> Network -> Ethernet -> Configure IPv4 -> Manually``
+   - For Linux (Ubuntu): Navigate to ``System Settings -> Network -> Wired -> Edit a Wired Connection -> IPv4 Settings -> Manually`` and provide the IP address in the space below it.
+   - For Windows: No need to configure.
 
 To test the web server setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
 

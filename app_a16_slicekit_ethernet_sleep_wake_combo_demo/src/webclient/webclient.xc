@@ -4,6 +4,7 @@
  ---------------------------------------------------------------------------*/
 #include "webclient.h"
 #include <string.h>
+#include <print.h>
 
 /*---------------------------------------------------------------------------
  constants
@@ -126,11 +127,19 @@ void webclient_set_server_config(server_config_t server_config)
  ---------------------------------------------------------------------------*/
 void webclient_init(chanend c_xtcp)
 {
+  xtcp_ipconfig_t ipconfig;
   conn.event = XTCP_ALREADY_HANDLED;
   do
   {
     slave xtcp_event(c_xtcp, conn);
   } while(conn.event != XTCP_IFUP);
+
+  xtcp_get_ipconfig(c_xtcp, ipconfig);
+  printstr("IP Address: ");
+  printint(ipconfig.ipaddr[0]);printstr(".");
+  printint(ipconfig.ipaddr[1]);printstr(".");
+  printint(ipconfig.ipaddr[2]);printstr(".");
+  printint(ipconfig.ipaddr[3]);printstr("\n");
 }
 
 /*---------------------------------------------------------------------------

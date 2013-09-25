@@ -54,9 +54,9 @@ xtcp_ipconfig_t ipconfig = {
 };
 
 server_config_t server_config = {
-  {127, 0, 1, 1},
-  500,
-  501
+  {169, 254, 186, 191},
+  80,
+  80
 };
 
 char ws_data_sleep[100] = "Going to sleep.";

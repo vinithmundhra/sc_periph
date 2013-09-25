@@ -10,7 +10,7 @@ def valid_ip(address):
   except:
     return False
         
-port = 501
+port = 80
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
