@@ -47,7 +47,7 @@ on tile[0]: port trigger_port = PORT_ADC_TRIGGER;
 /*---------------------------------------------------------------------------
  global variables
  ---------------------------------------------------------------------------*/
-xtcp_ipconfig_t ipconfig = {
+xtcp_ipconfig_t client_ipconfig = {
   {0, 0, 0, 0},
   {0, 0, 0, 0},
   {0, 0, 0, 0}
@@ -163,7 +163,7 @@ int main(void)
 
   par
   {
-    on ETHERNET_DEFAULT_TILE: ethernet_xtcp_server(xtcp_ports, ipconfig, c_xtcp, 1);
+    on ETHERNET_DEFAULT_TILE: ethernet_xtcp_server(xtcp_ports, client_ipconfig, c_xtcp, 1);
     on tile[1]: ethernet_sleep_wake_handler(c_sensor, c_xtcp[0]);
     on tile[0]: mixed_signal_slice_sensor_handler(c_sensor, c_adc, trigger_port, p_sw1);
     xs1_a_adc_service(c_adc);
