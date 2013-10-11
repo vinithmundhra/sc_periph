@@ -71,14 +71,12 @@ char ws_data_wake[100] = "Button = bbb; Temperature = ttt; Joystick X = xxx, Y =
 /*---------------------------------------------------------------------------
  tcp_handler
  ---------------------------------------------------------------------------*/
-void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
-                                 chanend c_xtcp)
+void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
 {
-  unsigned char btn_state, temperature, j_x, j_y;
-  unsigned short joystick_position;
   timer tmr;
   int sys_start_time;
-  unsigned int rtc_start_time, rtc_end_time, alarm_time;
+  unsigned int rtc_end_time, alarm_time;
+  sensor_data_t sensor_data;
 
   // If just woke up fom sleep, check sleep memory for any data
   if(at_pm_memory_is_valid())
@@ -102,47 +100,57 @@ void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
   // Send notification to begin recording sensor data
   webclient_send_data(c_xtcp, ws_data_notify);
 
+  // Connected to server. The sensor handler can now begin to record data.
+  c_sensor <: 1;
+
   tmr :> sys_start_time;
-  rtc_start_time =  at_rtc_read();
-  tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void;
-  rtc_end_time = at_rtc_read();
 
-  alarm_time = rtc_end_time + SLEEP_TIME;
-  at_pm_set_wake_time(alarm_time);
+  while(1)
+  {
+    select
+    {
+      case tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void:
+      {
+        rtc_end_time = at_rtc_read();
+        alarm_time = rtc_end_time + SLEEP_TIME;
+        at_pm_set_wake_time(alarm_time);
+        // Enable timer and LDR wake sources
+        at_pm_enable_wake_source(RTC);
+        at_pm_enable_wake_source(WAKE_PIN_HIGH);
+        // Inform webserver that I am going to sleep
+        webclient_send_data(c_xtcp, ws_data_sleep);
+        // Close connection
+        webclient_request_close(c_xtcp);
+        // Sleep
+        at_pm_sleep_now();
 
-  // Enable timer and LDR wake sources
-  at_pm_enable_wake_source(RTC);
-  at_pm_enable_wake_source(WAKE_PIN_HIGH);
+        break;
+      } //case timer
 
-  btn_state = c_sensor.ms_sensor_get_button_state();
-  temperature = c_sensor.ms_sensor_get_temperature();
-  joystick_position = c_sensor.ms_sensor_get_joystick_position();
+      case ms_sensor_data_changed(c_sensor, sensor_data):
+      {
+        // Update string
+        ws_data_wake[9] = sensor_data.btn_press_count/100 + '0';
+        ws_data_wake[10] = (sensor_data.btn_press_count%100)/10 + '0';
+        ws_data_wake[11] = sensor_data.btn_press_count%10 + '0';
+        ws_data_wake[28] = sensor_data.temperature/100 + '0';
+        ws_data_wake[29] = (sensor_data.temperature%100)/10 + '0';
+        ws_data_wake[30] = sensor_data.temperature%10 + '0';
+        ws_data_wake[46] = sensor_data.joystick_x/100 + '0';
+        ws_data_wake[47] = (sensor_data.joystick_x%100)/10 + '0';
+        ws_data_wake[48] = sensor_data.joystick_x%10 + '0';
+        ws_data_wake[55] = sensor_data.joystick_y/100 + '0';
+        ws_data_wake[56] = (sensor_data.joystick_y%100)/10 + '0';
+        ws_data_wake[57] = sensor_data.joystick_y%10 + '0';
 
-  j_y = (unsigned char)(joystick_position & 0xFF);
-  j_x = (unsigned char)((joystick_position >> 8u) & 0xFF);
+        // Send sensor data to web server
+        webclient_send_data(c_xtcp, ws_data_wake);
 
-  // Update string
-  ws_data_wake[9] = btn_state/100 + '0';
-  ws_data_wake[10] = (btn_state%100)/10 + '0';
-  ws_data_wake[11] = btn_state%10 + '0';
-  ws_data_wake[28] = temperature/100 + '0';
-  ws_data_wake[29] = (temperature%100)/10 + '0';
-  ws_data_wake[30] = temperature%10 + '0';
-  ws_data_wake[46] = j_x/100 + '0';
-  ws_data_wake[47] = (j_x%100)/10 + '0';
-  ws_data_wake[48] = j_x%10 + '0';
-  ws_data_wake[55] = j_y/100 + '0';
-  ws_data_wake[56] = (j_y%100)/10 + '0';
-  ws_data_wake[57] = j_y%10 + '0';
+        break;
+      } // case ms_sensor_data_changed
 
-  // Send sensor data to web server
-  webclient_send_data(c_xtcp, ws_data_wake);
-  // Inform webserver that I am going to sleep
-  webclient_send_data(c_xtcp, ws_data_sleep);
-  // Close connection
-  webclient_request_close(c_xtcp);
-  // Sleep
-  at_pm_sleep_now();
+    } //select
+  } //while(1)
 }
 
 /*---------------------------------------------------------------------------
@@ -150,9 +158,7 @@ void ethernet_sleep_wake_handler(client interface i_ms_sensor c_sensor,
  ---------------------------------------------------------------------------*/
 int main(void)
 {
-  chan c_xtcp[1];
-  chan c_adc;
-  interface i_ms_sensor c_sensor;
+  chan c_xtcp[1], c_adc, c_sensor;
 
   par
   {
