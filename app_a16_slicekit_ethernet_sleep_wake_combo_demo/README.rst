@@ -30,4 +30,4 @@ Required Repositories
 Support
 -------
 
-Issues may be submitted via the Issues tab in this github repo. Response to any issues submitted as at the discretion of the maintainer for this line.
+Issues may be submitted via the Issues tab in this github repository. Response to any issues submitted as at the discretion of the maintainer for this line.
