@@ -3,7 +3,7 @@
 #include "xassert.h"
 
 //Scaling functions used within this module
-static unsigned int convert_ms_to_ticks (unsigned int milliseconds){
+static unsigned long long convert_ms_to_ticks (unsigned int milliseconds){
   unsigned int read_val_32;
   unsigned long long ticks;
   read_node_config_reg(analog_tile, XS1_SU_CFG_SYS_CLK_FREQ_NUM, read_val_32); //read MHz setting
@@ -189,10 +189,10 @@ void at_pm_set_min_sleep_time(unsigned int min_sleep_time){
 }
 
 unsigned int at_rtc_read(void){
-  unsigned int time_now[2] = {0, 0};
+  unsigned int time_now[2];
   unsigned long long ticks;
   read_periph_32(analog_tile, XS1_SU_PER_RTC_CHANEND_NUM, XS1_SU_PER_RTC_LWR_32BIT_NUM, 2, time_now);
-  ticks = (unsigned long long) ((time_now[1] * 0x100000000) + time_now[0]);
+  ticks =  (((unsigned long long)time_now[1] << 32) + (unsigned long long)time_now[0]);
   return convert_ticks_to_ms(ticks);
 }
 

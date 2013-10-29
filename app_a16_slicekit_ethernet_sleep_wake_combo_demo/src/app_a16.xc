@@ -116,7 +116,7 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
         at_pm_set_wake_time(alarm_time);
         // Enable timer and LDR wake sources
         at_pm_enable_wake_source(RTC);
-        at_pm_enable_wake_source(WAKE_PIN_HIGH);
+        at_pm_enable_wake_source(WAKE_PIN_LOW);
         // Inform webserver that I am going to sleep
         webclient_send_data(c_xtcp, ws_data_sleep);
         // Close connection
