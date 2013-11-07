@@ -50,12 +50,14 @@
         <version>1.0.3rc0</version>
     </dependency>
     <dependency repo = "sc_pwm">
-        <githash>38a6f6c4033d7396cb270fe3a4971620d6a8f5de</githash>
+        <githash>1840a90570c83b14f3634bdd2162b95f57362cb0</githash>
         <uri>https://github.com/xcore/sc_pwm.git</uri>
+        <version>1.0.1beta5</version>
     </dependency>
     <dependency repo = "sc_xtcp">
-        <githash>5dc0a754fb43057611956d13b163a2bb74e3473c</githash>
+        <githash>b57f63aa0bf64834b17bd695fdc78c6c4b8f0fbf</githash>
         <uri>https://github.com/xcore/sc_xtcp.git</uri>
+        <version>3.1.4rc0</version>
     </dependency>
     <dependency repo = "sc_otp">
         <githash>062aa923a78bc603b254b2a99b78593ab3a816ec</githash>
@@ -63,6 +65,7 @@
         <version>1.0.0rc0</version>
     </dependency>
     <description>Collection of functions to support peripheral tiles.</description>
+    <docdir>app_a16_slicekit_ethernet_sleep_wake_combo_demo/doc_quickstart</docdir>
     <docdir>app_adc_demo_u/doc_quickstart</docdir>
     <docdir>app_adc_pwm_demo_a/doc_quickstart</docdir>
     <docdir>module_analog_tile_support/doc</docdir>

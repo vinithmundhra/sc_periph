@@ -15,8 +15,7 @@
 #define XS1_MAX_NUM_ADC 8
 
 /**
- * Minimum guarranteed buffer depth. Exceeding this number may cause lockup on read_packet.
- * Use multiple read commands for more than 5 enabled ADC channels
+ *
  */
 #define XS1_MAX_SAMPLES_PER_PACKET 5
 
@@ -50,7 +49,7 @@ typedef enum adc_bits_per_sample_t {
  */
 typedef struct {
     char                   input_enable[XS1_MAX_NUM_ADC];
-    adc_bits_per_sample_t  bits_per_sample;
+    adc_bits_per_sample_t  bits_per_sample;          
     unsigned int           samples_per_packet;       
     int                    calibration_mode;         
 } adc_config_t;

@@ -1,32 +1,18 @@
-// Copyright (c) 2013, XMOS Ltd., All rights reserved
-// This software is freely distributable under a derivative of the
-// University of Illinois/NCSA Open Source License posted in
-// LICENSE.txt and at <http://github.xcore.com/>
-
-/*===========================================================================
- Info
- ----
-
- ===========================================================================*/
-
-/*---------------------------------------------------------------------------
- include files
- ---------------------------------------------------------------------------*/
 #include "webclient.h"
 #include "ethernet_board_conf.h"
 #include "xtcp.h"
 #include "analog_tile_support.h"
 #include "ms_sensor.h"
 
-/*---------------------------------------------------------------------------
- constants
- ---------------------------------------------------------------------------*/
-#define AWAKE_TIME 60000  //Time awake in ms
-#define SLEEP_TIME 10000  //Time asleep in ms
 
-/*---------------------------------------------------------------------------
- ports and clocks
- ---------------------------------------------------------------------------*/
+
+#define AWAKE_TIME 60000  //Time awake in ms
+#define SLEEP_TIME 30000  //Time asleep in ms
+
+
+
+on tile[0]: in port p_sw1 = XS1_PORT_1F;
+on tile[0]: port trigger_port = PORT_ADC_TRIGGER;
 on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
   OTP_PORTS_INITIALIZER,
   ETHERNET_DEFAULT_SMI_INIT,
@@ -34,16 +20,8 @@ on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
   ETHERNET_DEFAULT_RESET_INTERFACE_INIT
 };
 
-on tile[0]: in port p_sw1 = XS1_PORT_1F;
-on tile[0]: port trigger_port = PORT_ADC_TRIGGER;
 
-/*---------------------------------------------------------------------------
- typedefs
- ---------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------
- global variables
- ---------------------------------------------------------------------------*/
 xtcp_ipconfig_t client_ipconfig = {
   {0, 0, 0, 0},
   {0, 0, 0, 0},
@@ -61,21 +39,12 @@ char ws_data_notify[100] = "Program running! Sensor events will now be recorded.
 char ws_data_wake[100] = "Button = bbb; Temperature = ttt; Joystick X = xxx, Y = yyy";
 
 /*---------------------------------------------------------------------------
- static variables
- ---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------
- static prototypes
- ---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------
- tcp_handler
+ ethernet_sleep_wake_handler
  ---------------------------------------------------------------------------*/
 void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
 {
   timer tmr;
-  int sys_start_time;
-  unsigned int rtc_end_time, alarm_time;
+  unsigned int sys_start_time, alarm_time;
   sensor_data_t sensor_data;
 
   // If just woke up fom sleep, check sleep memory for any data
@@ -91,6 +60,13 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
     at_pm_memory_validate();
   }
 
+  // Reset the RTC
+  at_rtc_reset();
+  // Enable wake pin
+  at_pm_enable_wake_source(WAKE_PIN_HIGH);
+  // Enable timer and LDR wake sources
+  at_pm_enable_wake_source(RTC);
+
   // Set webserver paramters
   webclient_set_server_config(server_config);
   // Init web client
@@ -99,7 +75,6 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   webclient_connect_to_server(c_xtcp);
   // Send notification to begin recording sensor data
   webclient_send_data(c_xtcp, ws_data_notify);
-
   // Connected to server. The sensor handler can now begin to record data.
   c_sensor <: 1;
 
@@ -111,19 +86,15 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
     {
       case tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void:
       {
-        rtc_end_time = at_rtc_read();
-        alarm_time = rtc_end_time + SLEEP_TIME;
-        at_pm_set_wake_time(alarm_time);
-        // Enable timer and LDR wake sources
-        at_pm_enable_wake_source(RTC);
-        at_pm_enable_wake_source(WAKE_PIN_LOW);
         // Inform webserver that I am going to sleep
         webclient_send_data(c_xtcp, ws_data_sleep);
         // Close connection
         webclient_request_close(c_xtcp);
+        // Set up time for timer wake up
+        alarm_time = at_rtc_read() + SLEEP_TIME;
+        at_pm_set_wake_time(alarm_time);
         // Sleep
         at_pm_sleep_now();
-
         break;
       } //case timer
 
@@ -142,13 +113,10 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
         ws_data_wake[55] = sensor_data.joystick_y/100 + '0';
         ws_data_wake[56] = (sensor_data.joystick_y%100)/10 + '0';
         ws_data_wake[57] = sensor_data.joystick_y%10 + '0';
-
         // Send sensor data to web server
         webclient_send_data(c_xtcp, ws_data_wake);
-
         break;
       } // case ms_sensor_data_changed
-
     } //select
   } //while(1)
 }
@@ -166,8 +134,6 @@ int main(void)
     on tile[1]: ethernet_sleep_wake_handler(c_sensor, c_xtcp[0]);
     on tile[0]: mixed_signal_slice_sensor_handler(c_sensor, c_adc, trigger_port, p_sw1);
     xs1_a_adc_service(c_adc);
-  }
+  } // par
   return 0;
 }
-
-/*==========================================================================*/

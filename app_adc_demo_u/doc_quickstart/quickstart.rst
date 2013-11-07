@@ -1,10 +1,10 @@
-xCORE-USB ADC Demo Quick Start Guide
+xCORE-USB ADC demo quick start guide
 ====================================
 
 .. _app_adc_demo_u_quick_start:
 
-app_adc_demo_u Quick Start Guide
------------------------------------
+Quick start guide (app_adc_demo_u)
+----------------------------------
 
 This application demonstrates how to use the ADC on xCORE-USB (U-Series)
 devices. The demo is designed to run out of the box on the ``USB AUDIO 2.0 DJ KIT``
@@ -13,7 +13,7 @@ devices. The demo is designed to run out of the box on the ``USB AUDIO 2.0 DJ KI
 The application reads the ADC and prints to the console whenever the ADC value
 changes. The ADC input is connected to the potentiometer on the board.
 
-Hardware Setup
+Hardware setup
 ++++++++++++++
 
 To setup the hardware (:ref:`adc_u_example_hardware_setup`):
@@ -24,13 +24,13 @@ To setup the hardware (:ref:`adc_u_example_hardware_setup`):
 
 .. _adc_u_example_hardware_setup:
 
-.. figure:: images/hw_setup.jpg
-   :width: 80mm
+.. figure:: images/hw_setup.*
+   :width: 120mm
    :align: center
 
    Hardware Setup for U-Series ADC example
 
-Import and Build the Application
+Import and build the application
 ++++++++++++++++++++++++++++++++
 
    #. Open xTIMEcomposer and open the edit perspective (Window->Open Perspective->XMOS Edit).
@@ -50,7 +50,7 @@ quick start guide within the Developer Column.
 
 For help in using xTIMEcomposer, try the xTIMEcomposer tutorial (See Help->Tutorials in xTIMEcomposer).
 
-Run the Application
+Run the application
 +++++++++++++++++++
 
 Now that the application has been compiled, the next step is to run it on the
@@ -64,19 +64,11 @@ into the xCORE multicore microcontroller.
       connected to the potentiometer on the board.
    #. Turning the potentiometer will change the value the ADC is reading.
 
-*Note:* if the run dialog does not appear and let select the XTAG then do the following:
-
-   #. From the drop-down next to the ``Run`` icon select ``Run Configurations``.
-   #. Press the ``New`` icon (white sheet with small yellow ``+`` symbol in the corner).
-   #. Ensure the Project is ``app_adc_demo_u``.
-   #. From the ``Target`` drop-down select the ``XMOS XTAG-2``.
-   #. Click the ``Run`` button on the bottom right of the dialog window.
-
 *Note:* every time there is output to the Console window from the application the Console
 window is brought to the foreground. To stop the Console window coming to the foreground
 simply stop the application using the ``Stop`` button in the Console window (red square).
 
-Next Steps
+Next steps
 ++++++++++
 
 Look at the source and change the application to use 8-bit ADC samples

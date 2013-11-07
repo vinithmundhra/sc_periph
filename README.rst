@@ -2,7 +2,7 @@ Peripheral Tile Support Library
 ...............................
 
 :Latest release: 1.1.0alpha0
-:Maintainer: pthedinger ed-xmos
+:Maintainer: XMOS
 :Description: Collection of functions to support peripheral tiles.
 
 

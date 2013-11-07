@@ -1,36 +1,14 @@
-
-/*---------------------------------------------------------------------------
- include files
- ---------------------------------------------------------------------------*/
 #include "webclient.h"
+#include <xs1.h>
 #include <string.h>
 #include <print.h>
 
-/*---------------------------------------------------------------------------
- constants
- ---------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------
- ports and clocks
- ---------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------
- typedefs
- ---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------
- global variables
- ---------------------------------------------------------------------------*/
 server_config_t server_cfg;
 xtcp_connection_t conn;
 
-/*---------------------------------------------------------------------------
- static variables
- ---------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------
- static prototypes
- ---------------------------------------------------------------------------*/
 
 /*==========================================================================*/
 /**
@@ -61,9 +39,7 @@ static int webclient_send(chanend c_xtcp, unsigned char buf[], int len)
       case XTCP_SENT_DATA:
       {
         int sendlen = (len - index);
-        if (sendlen > conn.mss)
-        sendlen = conn.mss;
-
+        if (sendlen > conn.mss) sendlen = conn.mss;
         xtcp_sendi(c_xtcp, buf, index, sendlen);
         prev = index;
         index += sendlen;
@@ -172,14 +148,19 @@ int webclient_send_data(chanend c_xtcp, char data[])
 void webclient_request_close(chanend c_xtcp)
 {
   char dummy_data[1];
-  xtcp_write(c_xtcp, conn, dummy_data, 0);
+  timer t;
+  unsigned time;
+
+  webclient_send(c_xtcp, dummy_data, 0);
   xtcp_close(c_xtcp, conn);
+
   // Wait till the connection is closed
   conn.event = XTCP_ALREADY_HANDLED;
   do
   {
     slave xtcp_event(c_xtcp, conn);
   } while(conn.event != XTCP_CLOSED);
-}
 
-/*==========================================================================*/
+  t :> time;
+  t when timerafter(time + 100000) :> void;
+}

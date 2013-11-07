@@ -1,5 +1,6 @@
 In-Device Peripheral Library Change Log
 =======================================
+
 1.1.1
 -----
   * Refreshed code and documentation so it correctly references XP-SKC-A16 sliceKIT core board

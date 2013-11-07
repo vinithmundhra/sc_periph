@@ -1,4 +1,4 @@
-A16 sliceKIT Ethernet Sleep Wake Combo Demo
+A16 sliceKIT Ethernet sleep wake combo demo
 ===========================================
 
 :scope: Example
@@ -14,7 +14,7 @@ This is a simple demo using the Sleep and Wake feature of A series XMOS devices.
 Software requirements
 ---------------------
 
-- Python installed on host workstation
+- Python installed on host workstation (2.7.3 or newer)
 - xTIMEcomposer Studio version 13.0.0 (beta) or newer
 
 Required Repositories
