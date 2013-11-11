@@ -52,8 +52,8 @@ Setup:
    - To use LDR as wake up source, attach jumpers on (or short):
       - Pins 1 & 2 of ``J6``
       - Pins 2 & 3 (LDR_COMP) of ``J7``
-   - To use switch (SW2) as wake up source, do not attach any jumpers.
-   - This demo will use LDR as the wake up source.
+   - To use button (SW2) as wake up source, do not attach any jumpers.
+   - This demo will use LDR as the wake up source. If you'd like to use the button (SW2) as a wake up source, please remove the jumpers (J6 and J7) on the ``XA-SK-MIXED SIGNAL`` sliceCARD.
 * Connect the 12V power supply to the core board and switch it ON.
 
 .. figure:: images/hardware_setup.*
