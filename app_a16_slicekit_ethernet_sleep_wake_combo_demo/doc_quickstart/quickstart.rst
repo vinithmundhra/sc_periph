@@ -15,10 +15,17 @@ Host computer / Other setup
 To test the web server setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
 
 #. Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``
-#. Run ``server.py``. The server IP address will be displayed in the console.
-#. Run ``test_client.py`` with server IP address as argument.
+#. Run ``server.py``. The server IP address will be displayed in the console::
+
+   python server.py
+
+#. Run ``test_client.py`` with server IP address as argument::
+
+   python test_client.py 169.254.202.189
+
 #. The client would open, send a message to web server close the connection, twice!
-#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the web server setup is correct.
+#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the web server setup is correct. Ignore the countdown as this step is just to test web server setup.
+#. Press *CTRL+C* to exit the web server.
 
 Please note:
 
@@ -99,13 +106,12 @@ Demo:
 
 * Navigate to ($/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver)
 * Double click or Run the python script: ``server.py``
-* The following message is displayed in the Python console::
+* The following message is displayed in the Python console. Note: The IP address may change depending on your network::
 
    -----------------------------------------
    Web Server Address = 169.254.202.189
    Press CTRL+C to stop web server and exit.
    -----------------------------------------
-   *Note: This IP address may change depending on your network.*
 
 * Wait until the following message is displayed::
 
@@ -138,9 +144,10 @@ Demo:
 * After a while (AWAKE TIME = 1 minute) the following message is displayed::
 
    XMOS: Going to sleep.
+   -----------------------------------------
    Expecting Wakeup in (seconds)...
-   30 ...
-   29 ...
+   30
+   29
 
 * At this point, the chip enters sleep mode and could be woken up by two sources:
    - If the room gets dark - LDR triggers wake signal on low light

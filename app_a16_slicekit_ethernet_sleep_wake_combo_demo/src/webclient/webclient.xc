@@ -2,7 +2,7 @@
 #include <xs1.h>
 #include <string.h>
 #include <print.h>
-
+#include <timer.h>
 
 
 server_config_t server_cfg;
@@ -148,9 +148,6 @@ int webclient_send_data(chanend c_xtcp, char data[])
 void webclient_request_close(chanend c_xtcp)
 {
   char dummy_data[1];
-  timer t;
-  unsigned time;
-
   webclient_send(c_xtcp, dummy_data, 0);
   xtcp_close(c_xtcp, conn);
 
@@ -160,7 +157,6 @@ void webclient_request_close(chanend c_xtcp)
   {
     slave xtcp_event(c_xtcp, conn);
   } while(conn.event != XTCP_CLOSED);
-
-  t :> time;
-  t when timerafter(time + 100000) :> void;
+  // Ack the FIN,ACK from host. Let it close.
+  delay_milliseconds(100);
 }
