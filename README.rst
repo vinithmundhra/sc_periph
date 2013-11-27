@@ -1,13 +1,13 @@
 Peripheral Tile Support Library
 ...............................
 
-:Latest release: 1.1.0alpha0
-:Maintainer: XMOS
+:Latest release: 1.0.0rc1
+:Maintainer: pthedinger
 :Description: Collection of functions to support peripheral tiles.
 
 
 The Peripheral Tile Support Library provides a set of functions and 
-datatypes which aid the use of the xCORE peripheral tiles.
+datatypes which aid the use of the peripheral tiles.
 
 Key Features
 ============

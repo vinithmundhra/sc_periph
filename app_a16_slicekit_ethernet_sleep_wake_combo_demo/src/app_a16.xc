@@ -3,7 +3,7 @@
 #include "xtcp.h"
 #include "analog_tile_support.h"
 #include "ms_sensor.h"
-
+#include <timer.h>
 
 
 #define AWAKE_TIME 60000  //Time awake in ms
@@ -23,8 +23,8 @@ on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
 
 
 xtcp_ipconfig_t client_ipconfig = {
-  {0, 0, 0, 0},
-  {0, 0, 0, 0},
+  {169, 254, 202, 190},
+  {255, 255, 0, 0},
   {0, 0, 0, 0}
 };
 
@@ -46,6 +46,7 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   timer tmr;
   unsigned int sys_start_time, alarm_time;
   sensor_data_t sensor_data;
+  char fresh_start = 0;
 
   // If just woke up fom sleep, check sleep memory for any data
   if(at_pm_memory_is_valid())
@@ -58,6 +59,7 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
     // Write server configuration to sleep memory
     at_pm_memory_write(server_config);
     at_pm_memory_validate();
+    fresh_start = 1;
   }
 
   // Reset the RTC
@@ -66,11 +68,13 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   at_pm_enable_wake_source(WAKE_PIN_HIGH);
   // Enable timer and LDR wake sources
   at_pm_enable_wake_source(RTC);
-
+  // Delay for some time to start web server on the host computer
+  if(fresh_start) delay_seconds(5);
   // Set webserver paramters
   webclient_set_server_config(server_config);
   // Init web client
   webclient_init(c_xtcp);
+
   // Connect to webserver
   webclient_connect_to_server(c_xtcp);
   // Send notification to begin recording sensor data

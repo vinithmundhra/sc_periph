@@ -7,32 +7,22 @@ Host computer / Other setup
 ---------------------------
 
 * Required a computer with Python (2.7.3 or newer) installed. Get Python from: http://www.python.org/
-* If you are planning to connect the Ethernet cable directly to your host computer's Ethernet port, it may be required to setup a static IP configuration. Please configure your wired connection IPv4 settings to provide a static IP address. For example, IP address = 169.254.202.189; Netmask = 255.255.0.0; Gateway = 255.255.255.0
-   - For Mac: Navigate to *System Preferences -> Network -> Ethernet -> Configure IPv4 -> Manually*
+* Download and install the latest xTIMEcomposer Studio (Community or Enterprise) from XMOS website.
+* Setup a static IP configuration: Please configure your wired connection IPv4 settings to provide a static IP address. For example, IP address = 169.254.202.189; and Netmask = 255.255.0.0;
+   - For Mac: Navigate to *System Preferences -> Network -> Ethernet -> Configure IPv4 -> Manually* and provide the IP address.
    - For Linux (Ubuntu): Navigate to *System Settings -> Network -> Wired -> Edit a Wired Connection -> IPv4 Settings -> Manually* and provide the IP address in the space below it.
-   - For Windows: No need to configure.
-
-To test the web server setup, a simple client is provided in ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``:
-
-#. Navigate to ``$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver``
-#. Run ``server.py``. The server IP address will be displayed in the console::
-
-   python server.py
-
-#. Run ``test_client.py`` with server IP address as argument::
-
-   python test_client.py 169.254.202.189
-
-#. The client would open, send a message to web server close the connection, twice!
-#. Look for the message *Hi from test client* in the Server console. If this message is displayed (twice), the web server setup is correct. Ignore the countdown as this step is just to test web server setup.
-#. Press *CTRL+C* to exit the web server.
+   - For Windows: Navigate to *Start -> Control Panel -> Network and Sharing Center -> Change Adapter Settings (on the left pane)*
+      - Double click on *Local Area Connection*
+      - Double click on *Internet Protocol Version 4*
+      - Select the option 'Use the following IP address'
+      - Provide the IP address and Subnet mask (gateway can be blank).
+      - Click *OK*
 
 Please note:
 
 * Administrator privileges may be required to run the ``server.py`` and ``test_client.py``.
    - For Windows: start command prompt as an administrator and then execute the python scripts.
    - For Mac / Linux: run the scripts with *sudo*.
-* ``test_client.py`` could be run on a different workstation provided that the two workstations are connected via a Ethernet cable.
 
 Hardware setup
 --------------
@@ -83,9 +73,8 @@ Building the A16 sliceKIT Ethernet sleep wake combo demo application:
 
 * Open the file *$/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/app_a16.xc*
 * Go to line:32 and change the IP address of the web server (``server_config``) that the web client will try to connect to.
-* This XMOS application will also acquire an IP address on the network, using the IP configuration (``client_ipconfig``) present on line:50. This can configured to get the IP address dynamically or by providing a static IP.
-   - Make it all zeroes to use DHCP
-   - Or, specify an IP address according to the network. Usually, this would be the web server IP address + 1. For example, if the web server IP address is 169.254.202.189, then this IP address would be 169.254.202.190.
+* This XMOS application will also acquire an IP address on the network, using the IP configuration (``client_ipconfig``) present on line:25. This should be configured to use a static IP address by:
+   - Specify an IP address according to the network. Usually, this would be the web server IP address + 1. For example, if the web server IP address is 169.254.202.189, then this IP address would be 169.254.202.190.
 * Save the application using *File -> Save*.
 * Click on the *app_a16_slicekit_ethernet_sleep_wake_combo_demo* item in the *Project Explorer* window.
 * Click on the *Build* (indicated by a 'Hammer' picture) icon.
@@ -100,13 +89,17 @@ Flash the Application:
 * A *Select Device* window appears.
 * Select *XMOS XTAG-2 connected to L1* and click OK.
 * Check the *Console* window to verify flashing progress.
-* After successful flashing, power cycle the sliceKIT A16 core board.
+* After successful flashing, switch OFF the sliceKIT A16 core board.
 
 Demo:
 
-* Navigate to ($/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver)
-* Double click or Run the python script: ``server.py``
-* The following message is displayed in the Python console. Note: The IP address may change depending on your network::
+* Navigate to ($/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver) in the *Terminal* or *Command Line*
+* Switch ON the power supply to sliceKIT A16 core board.
+* Within 5 seconds after switching ON the power supply to the core board, run the python script with the web server address:: 
+
+   python server.py 169.254.202.189
+   
+* The following message is displayed in the Python console::
 
    -----------------------------------------
    Web Server Address = 169.254.202.189

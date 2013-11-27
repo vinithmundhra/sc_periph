@@ -15,7 +15,7 @@ Software requirements
 ---------------------
 
 - Python installed on host workstation (2.7.3 or newer)
-- xTIMEcomposer Studio version 13.0.0 (beta) or newer
+- xTIMEcomposer Studio version 13 Community or Enterprise
 
 Required Repositories
 ---------------------

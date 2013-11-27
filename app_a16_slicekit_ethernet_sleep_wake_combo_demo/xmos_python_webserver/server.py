@@ -1,20 +1,45 @@
 import sys
 import signal, os
+import time
+import threading
 
-kb_interrupt = False
-
-def kb_handler(signum, frame):
-    global kb_interrupt
-    kb_interrupt = True
-
-signal.signal(signal.SIGINT, kb_handler)
-
+# Exit the program if Python version used is lower than 2.7.3
 if sys.version_info < (2,7,3):
   print('Required Python version 2.7.3 or newer. Exiting!')
   exit(1)
 
-from get_ip_address import get_ip_address    
+# Global variables
+g_kb_interrupt = False
+g_start_counter = 0
+g_sleep_time = 30
+
+# Check for valid IP address
+def valid_ip(address):
+  try:
+    host_bytes = address.split('.')
+    valid = [int(b) for b in host_bytes]
+    valid = [b for b in valid if b >= 0 and b <= 255]
+    return len(host_bytes) == 4 and len(valid) == 4
+  except:
+    return False
+    
+# Get the IP address to run the server on. 
+# This should be same as HOST computer's static IP address
+try:
+  g_HOST = sys.argv[1]
+  if not valid_ip(g_HOST):
+    exit(1)
+except:
+   print('Please enter a valid Web server IP address. Exiting!')
+   exit(1)
   
+# Keyboard interrupt handler
+def kb_handler(signum, frame):
+    global g_kb_interrupt
+    g_kb_interrupt = True
+
+signal.signal(signal.SIGINT, kb_handler)
+
 if sys.version_info < (3,0,1):
 
   # ----------------------------------------------------------------------------
@@ -23,16 +48,6 @@ if sys.version_info < (3,0,1):
   # ----------------------------------------------------------------------------
   # ----------------------------------------------------------------------------
   import SocketServer
-  import time
-  import threading
-  from get_ip_address import get_ip_address
-
-  # ----------------------------------------------------------------------------
-  # Global variables
-  # ----------------------------------------------------------------------------
-  g_start_counter = 0
-  g_sleep_time = 30
-
   # ----------------------------------------------------------------------------
   # The TCP handler
   # ----------------------------------------------------------------------------
@@ -62,20 +77,22 @@ if sys.version_info < (3,0,1):
   # ----------------------------------------------------------------------------
   def start_server():
 
-    HOST = get_ip_address()
+    global g_HOST
     PORT = 80
-
-    print('-----------------------------------------')
-    print('Web Server Address = %s' % HOST)
-    print('Press CTRL+C to stop web server and exit.')
-    print('-----------------------------------------')
-             
+         
     SocketServer.TCPServer.allow_reuse_address = True
-    server = SocketServer.TCPServer((HOST, PORT), xmos_tcp_handler)
-    
-    # TODO: Keyboard interrupt doesn't work here!
-    # Hence, the socket doen't close properly and appear as 'Address already in
-    # use' when calling this script again
+    try:
+      server = SocketServer.TCPServer((g_HOST, PORT), xmos_tcp_handler)
+      print('-----------------------------------------')
+      print('Web Server Address = %s' % g_HOST)
+      print('Press CTRL+C to stop web server and exit.')
+      print('-----------------------------------------')      
+    except:
+      print('-----------------------------------------')
+      print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
+      global g_kb_interrupt
+      g_kb_interrupt = True
+
     try:
       server.serve_forever()
     except KeyboardInterrupt:
@@ -98,7 +115,7 @@ if sys.version_info < (3,0,1):
         else:
           print('Sleep time exceeded. The chip should have woken up by now!')
           g_start_counter = 0
-      if kb_interrupt:
+      if g_kb_interrupt:
         break
 
   # ----------------------------------------------------------------------------
@@ -114,7 +131,7 @@ if sys.version_info < (3,0,1):
     t_counter.start()
 
     while True:
-      if kb_interrupt:
+      if g_kb_interrupt:
         t_counter.join()
         print('Terminating...')
         break
@@ -128,16 +145,6 @@ else:
   # ----------------------------------------------------------------------------
   # ----------------------------------------------------------------------------
   import socketserver
-  import time
-  import threading
-  from get_ip_address import get_ip_address
-
-  # ----------------------------------------------------------------------------
-  # Global variables
-  # ----------------------------------------------------------------------------
-  g_start_counter = 0
-  g_sleep_time = 30
-
   # ----------------------------------------------------------------------------
   # The TCP handler
   # ----------------------------------------------------------------------------
@@ -166,20 +173,22 @@ else:
   # ----------------------------------------------------------------------------
   def start_server():
 
-    HOST = get_ip_address()
+    global g_HOST
     PORT = 80
 
-    print('-----------------------------------------')
-    print('Web Server Address = %s' % HOST)
-    print('Press CTRL+C to stop web server and exit.')
-    print('-----------------------------------------')
-
     socketserver.TCPServer.allow_reuse_address = True
-    server = socketserver.TCPServer((HOST, PORT), xmos_tcp_handler)
+    try:
+      server = socketserver.TCPServer((g_HOST, PORT), xmos_tcp_handler)
+      print('-----------------------------------------')
+      print('Web Server Address = %s' % g_HOST)
+      print('Press CTRL+C to stop web server and exit.')
+      print('-----------------------------------------')    
+    except:
+      print('-----------------------------------------')
+      print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
+      global g_kb_interrupt
+      g_kb_interrupt = True      
 
-    # TODO: Keyboard interrupt doesn't work here!
-    # Hence, the socket doen't close properly and appear as 'Address already in
-    # use' when calling this script again
     try:
       server.serve_forever()
     except KeyboardInterrupt:
@@ -202,7 +211,7 @@ else:
         else:
           print('Sleep time exceeded. The chip should have woken up by now!')
           g_start_counter = 0
-      if kb_interrupt:
+      if g_kb_interrupt:
         break
         
   # ----------------------------------------------------------------------------
@@ -218,7 +227,7 @@ else:
     t_counter.start()
 
     while True:
-      if kb_interrupt:
+      if g_kb_interrupt:
         t_counter.join()
         print('Terminating...')
         break
