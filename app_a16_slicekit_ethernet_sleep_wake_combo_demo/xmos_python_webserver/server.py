@@ -22,8 +22,8 @@ def valid_ip(address):
     return len(host_bytes) == 4 and len(valid) == 4
   except:
     return False
-    
-# Get the IP address to run the server on. 
+
+# Get the IP address to run the server on.
 # This should be same as HOST computer's static IP address
 try:
   g_HOST = sys.argv[1]
@@ -32,7 +32,7 @@ try:
 except:
    print('Please enter a valid Web server IP address. Exiting!')
    exit(1)
-  
+
 # Keyboard interrupt handler
 def kb_handler(signum, frame):
     global g_kb_interrupt
@@ -51,7 +51,7 @@ if sys.version_info < (3,0,1):
   # ----------------------------------------------------------------------------
   # The TCP handler
   # ----------------------------------------------------------------------------
-      
+
   class xmos_tcp_handler(SocketServer.BaseRequestHandler):
 
     def handle(self):
@@ -66,10 +66,10 @@ if sys.version_info < (3,0,1):
           print('XMOS: %s' % data)
         else:
           print('-----------------------------------------')
-          print('Expecting Wakeup in (seconds)...')          
-          g_sleep_time = 30          
-          g_start_counter = 1
+          print('Expecting Wakeup in (seconds)...')
+          g_sleep_time = 30
           self.request.close()
+          g_start_counter = 1          
           break
 
   # ----------------------------------------------------------------------------
@@ -79,14 +79,14 @@ if sys.version_info < (3,0,1):
 
     global g_HOST
     PORT = 80
-         
+
     SocketServer.TCPServer.allow_reuse_address = True
     try:
       server = SocketServer.TCPServer((g_HOST, PORT), xmos_tcp_handler)
       print('-----------------------------------------')
       print('Web Server Address = %s' % g_HOST)
       print('Press CTRL+C to stop web server and exit.')
-      print('-----------------------------------------')      
+      print('-----------------------------------------')
     except:
       print('-----------------------------------------')
       print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
@@ -97,7 +97,7 @@ if sys.version_info < (3,0,1):
       server.serve_forever()
     except KeyboardInterrupt:
       server.socket.close()
-      
+
   # ----------------------------------------------------------------------------
   # Counter
   # ----------------------------------------------------------------------------
@@ -107,11 +107,11 @@ if sys.version_info < (3,0,1):
     global g_start_counter
 
     while True:
+      time.sleep(1)
       if g_start_counter == 1:
-        if g_sleep_time > 0:
+        if g_sleep_time >= 0:
           print(g_sleep_time)
           g_sleep_time -= 1
-          time.sleep(1)
         else:
           print('Sleep time exceeded. The chip should have woken up by now!')
           g_start_counter = 0
@@ -162,10 +162,10 @@ else:
           print('XMOS: %s' % data)
         else:
           print('-----------------------------------------')
-          print('Expecting Wakeup in (seconds)...')          
-          g_sleep_time = 30          
-          g_start_counter = 1
+          print('Expecting Wakeup in (seconds)...')
+          g_sleep_time = 30
           self.request.close()
+          g_start_counter = 1
           break
 
   # ----------------------------------------------------------------------------
@@ -182,12 +182,12 @@ else:
       print('-----------------------------------------')
       print('Web Server Address = %s' % g_HOST)
       print('Press CTRL+C to stop web server and exit.')
-      print('-----------------------------------------')    
+      print('-----------------------------------------')
     except:
       print('-----------------------------------------')
       print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
       global g_kb_interrupt
-      g_kb_interrupt = True      
+      g_kb_interrupt = True
 
     try:
       server.serve_forever()
@@ -203,17 +203,17 @@ else:
     global g_start_counter
 
     while True:
+      time.sleep(1)
       if g_start_counter == 1:
-        if g_sleep_time > 0:
+        if g_sleep_time >= 0:
           print(g_sleep_time)
           g_sleep_time -= 1
-          time.sleep(1)
         else:
           print('Sleep time exceeded. The chip should have woken up by now!')
           g_start_counter = 0
       if g_kb_interrupt:
         break
-        
+
   # ----------------------------------------------------------------------------
   # MAIN
   # ----------------------------------------------------------------------------
@@ -232,4 +232,4 @@ else:
         print('Terminating...')
         break
       pass
-      
+

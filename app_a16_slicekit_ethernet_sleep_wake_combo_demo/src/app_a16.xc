@@ -69,12 +69,11 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   // Enable timer and LDR wake sources
   at_pm_enable_wake_source(RTC);
   // Delay for some time to start web server on the host computer
-  if(fresh_start) delay_seconds(5);
+  if(fresh_start) delay_seconds(15);
   // Set webserver paramters
   webclient_set_server_config(server_config);
   // Init web client
   webclient_init(c_xtcp);
-
   // Connect to webserver
   webclient_connect_to_server(c_xtcp);
   // Send notification to begin recording sensor data
