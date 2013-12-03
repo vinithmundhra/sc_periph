@@ -110,7 +110,7 @@ void at_adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config)
         at_adc_trigger(trigger_port);
 }
 
-void at_adc_read(chanend adc_chan, 
+void at_adc_read(chanend adc_chan,
               const_adc_config_ref_t config,
               unsigned int &data)
 {
@@ -132,7 +132,7 @@ void at_adc_read(chanend adc_chan,
     }
 }
 
-void at_adc_read_packet(chanend adc_chan, 
+void at_adc_read_packet(chanend adc_chan,
               const_adc_config_ref_t config,
               unsigned int data[])
 {

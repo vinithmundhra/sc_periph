@@ -16,7 +16,7 @@
 /**
  * Reads sleep memory and copies to array/structure up to 128B
  *
- * \param x      Structure or array that is copied into sleep memory 
+ * \param x      Structure or array that is copied into sleep memory
  */
 #define at_pm_memory_write(x) at_pm_memory_write_impl((x, char[]), sizeof(x))
 
@@ -34,7 +34,7 @@
 /**
  * Max stabilisation time of 20MHz oscillator in milliseconds Approximate speed of 31KHz on chip silicon oscilator in Hz
  */
-#define SI_OSC_STABILISATION   15       
+#define SI_OSC_STABILISATION   15
 
 /**
  * Maximum percetage change of VCO. Used in sleep mode to see if XTAL and 20MHz OSC are close enough
@@ -58,8 +58,8 @@ at_wake_sources_t;
 
 /** Function that writes an array of size up to 128B to sleep memory.
  * This is the worker function that copies the array from the sleep memory.
- * Note, to pass types other than char[], please use at_pm_memory_read(x) 
- * which is a macro that first casts the passed variable to char before 
+ * Note, to pass types other than char[], please use at_pm_memory_read(x)
+ * which is a macro that first casts the passed variable to char before
  * calling this function.
  *
  * \param data      reference to the charater array to be written

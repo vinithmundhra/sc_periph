@@ -25,7 +25,7 @@ typedef struct server_config_t_
 
 /*==========================================================================*/
 /**
- *  Set server configuration. The webclient will look for this server and 
+ *  Set server configuration. The webclient will look for this server and
  *  try connecting to it.
  *
  *  \param server_config    The IP address of the Server to connect to, IN
@@ -61,7 +61,7 @@ void webclient_connect_to_server(chanend c_xtcp);
  *  \return 1 on success, 0 on failure.
  **/
 int webclient_send_data(chanend c_xtcp, char data[]);
- 
+
  /*==========================================================================*/
 /**
  *  Close the current connection
@@ -69,6 +69,6 @@ int webclient_send_data(chanend c_xtcp, char data[]);
  *  \param c_xtcp    The XTCP channel
  *  \return None
  **/
-void webclient_request_close(chanend c_xtcp); 
- 
+void webclient_request_close(chanend c_xtcp);
+
 #endif // __webclient_h__

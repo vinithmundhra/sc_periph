@@ -9,7 +9,7 @@
 /****
  * This file provides all the support required for peripherals tile of
  * A-Series devices:
- * 
+ *
  *  - Analog to Digital Converters (at_adc.h)
  *  - Watchdog timer (at_wdt.h)
  *  - Sleep related functions (at_sleep.h)

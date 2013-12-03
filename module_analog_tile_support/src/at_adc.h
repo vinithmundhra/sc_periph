@@ -48,7 +48,7 @@ typedef struct {
     char                   input_enable[XS1_MAX_NUM_ADC];   /**<An array ints to determine which inputs are active.                                                                                    Each non-zero input will be enabled.*/
     at_adc_bits_per_sample_t  bits_per_sample;              /**<Select how many bits to sample per ADC.*/
     unsigned int           samples_per_packet;              /**< Number of samples per packet. Must be >0 and <=XS1_MAX_SAMPLES_PER_PACKET.*/
-    int                    calibration_mode;                /**<When set the ADCs will sample a 0.8V reference 
+    int                    calibration_mode;                /**<When set the ADCs will sample a 0.8V reference
                                                             rather than the external voltage.*/
 } at_adc_config_t;
 
@@ -70,7 +70,7 @@ typedef const at_adc_config_t & const_adc_config_ref_t;
  * \param trigger_port The port connected to the ADC trigger pin.
  * \param config       The configuration to be used.
  *
- * \return ADC_OK on success and one of the return codes in adc_return_t on an error. 
+ * \return ADC_OK on success and one of the return codes in adc_return_t on an error.
  */
 void at_adc_enable(tileref periph_tile, chanend adc_chan, out port trigger_port, const_adc_config_ref_t config);
 
@@ -115,7 +115,7 @@ void at_adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config)
 #ifdef __XC__
 #pragma select handler
 #endif
-void at_adc_read(chanend adc_chan, 
+void at_adc_read(chanend adc_chan,
               const_adc_config_ref_t config,
               REFERENCE_PARAM(unsigned int, data));
 
@@ -139,7 +139,7 @@ void at_adc_read(chanend adc_chan,
 #ifdef __XC__
 #pragma select handler
 #endif
-void at_adc_read_packet(chanend adc_chan, 
+void at_adc_read_packet(chanend adc_chan,
               const_adc_config_ref_t config,
               unsigned int data[]);
 
