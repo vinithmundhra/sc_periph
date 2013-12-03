@@ -5,6 +5,9 @@
 #include "ms_sensor.h"
 #include <timer.h>
 
+typedef struct client_data_t {
+  unsigned btn_press_count;
+} client_data_t;
 
 
 #define AWAKE_MILLISECS 60000
@@ -19,8 +22,6 @@ on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
   ETHERNET_DEFAULT_MII_INIT_lite,
   ETHERNET_DEFAULT_RESET_INTERFACE_INIT
 };
-
-
 
 xtcp_ipconfig_t client_ipconfig = {
   {169, 254, 202, 190},
@@ -48,20 +49,14 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   timer tmr;
   unsigned int sys_start_time, alarm_time;
   sensor_data_t sensor_data;
-  char fresh_start = 0;
+  char fresh_start = 1;
 
   // If just woke up fom sleep, check sleep memory for any data
   if(at_pm_memory_is_valid())
   {
     // Read server configuration from sleep memory
-    at_pm_memory_read(server_config);
-  }
-  else
-  {
-    // Write server configuration to sleep memory
-    at_pm_memory_write(server_config);
-    at_pm_memory_validate();
-    fresh_start = 1;
+    at_pm_memory_read(client_data);
+    fresh_start = 0;
   }
 
   // Reset the RTC
@@ -95,6 +90,12 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
         webclient_send_data(c_xtcp, ws_data_sleep);
         // Close connection
         webclient_request_close(c_xtcp);
+
+        // Store the current client status to sleep memory
+        client_data.btn_press_count += sensor_data.btn_press_count;
+        at_pm_memory_write(client_data);
+        at_pm_memory_validate();
+
         // Set up time for timer wake up
         alarm_time = at_rtc_read() + SLEEP_MILLISECS;
         at_pm_set_wake_time(alarm_time);
@@ -105,10 +106,12 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
 
       case ms_sensor_data_changed(c_sensor, sensor_data):
       {
+        unsigned btn_press_count = sensor_data.btn_press_count + client_data.btn_press_count;
+
         // Update string
-        ws_data_wake[9] = sensor_data.btn_press_count/100 + '0';
-        ws_data_wake[10] = (sensor_data.btn_press_count%100)/10 + '0';
-        ws_data_wake[11] = sensor_data.btn_press_count%10 + '0';
+        ws_data_wake[9] = btn_press_count/100 + '0';
+        ws_data_wake[10] = (btn_press_count%100)/10 + '0';
+        ws_data_wake[11] = btn_press_count%10 + '0';
         ws_data_wake[28] = sensor_data.temperature/100 + '0';
         ws_data_wake[29] = (sensor_data.temperature%100)/10 + '0';
         ws_data_wake[30] = sensor_data.temperature%10 + '0';
