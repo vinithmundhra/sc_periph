@@ -34,9 +34,11 @@ server_config_t server_config = {
   80
 };
 
-char ws_data_sleep[100] = "Going to sleep.";
-char ws_data_notify[100] = "Program running! Sensor events will now be recorded.";
-char ws_data_wake[100] = "Button = bbb; Temperature = ttt; Joystick X = xxx, Y = yyy";
+client_data_t client_data = { 0 };
+
+char ws_data_sleep[] = "Going to sleep.\n";
+char ws_data_notify[] = "Program running! Sensor events will now be recorded.\n";
+char ws_data_wake[] = "Button = bbb; Temperature = ttt; Joystick X = xxx, Y = yyy\n";
 
 /*---------------------------------------------------------------------------
  ethernet_sleep_wake_handler

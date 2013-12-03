@@ -63,7 +63,9 @@ if sys.version_info < (3,0,1):
         data = self.request.recv(1024).decode()
         g_start_counter = 0
         if data:
-          print('XMOS: %s' % data)
+          for line in data.split('\n'):
+            if line:
+              print('XMOS: %s' % line)
         else:
           print('-----------------------------------------')
           print('Expecting Wakeup in (seconds)...')
@@ -159,7 +161,9 @@ else:
         data = self.request.recv(1024).decode()
         g_start_counter = 0
         if data:
-          print('XMOS: %s' % data)
+          for line in data.split('\n'):
+            if line:
+              print('XMOS: %s' % line)
         else:
           print('-----------------------------------------')
           print('Expecting Wakeup in (seconds)...')
