@@ -6,9 +6,9 @@
 #include <timer.h>
 
 
-#define AWAKE_TIME 60000  //Time awake in ms
-#define SLEEP_TIME 30000  //Time asleep in ms
 
+#define AWAKE_MILLISECS 60000
+#define SLEEP_MILLISECS 30000
 
 
 on tile[0]: in port p_sw1 = XS1_PORT_1F;
@@ -89,14 +89,14 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   {
     select
     {
-      case tmr when timerafter(sys_start_time + (AWAKE_TIME * 100000)) :> void:
+      case tmr when timerafter(sys_start_time + (AWAKE_MILLISECS * 100000)) :> void:
       {
         // Inform webserver that I am going to sleep
         webclient_send_data(c_xtcp, ws_data_sleep);
         // Close connection
         webclient_request_close(c_xtcp);
         // Set up time for timer wake up
-        alarm_time = at_rtc_read() + SLEEP_TIME;
+        alarm_time = at_rtc_read() + SLEEP_MILLISECS;
         at_pm_set_wake_time(alarm_time);
         // Sleep
         at_pm_sleep_now();
