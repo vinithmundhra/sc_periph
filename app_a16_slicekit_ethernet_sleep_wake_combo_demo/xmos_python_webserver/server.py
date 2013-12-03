@@ -89,16 +89,18 @@ if sys.version_info < (3,0,1):
       print('Web Server Address = %s' % g_HOST)
       print('Press CTRL+C to stop web server and exit.')
       print('-----------------------------------------')
+
+      try:
+        server.serve_forever()
+      except KeyboardInterrupt:
+        server.socket.close()
+
     except:
       print('-----------------------------------------')
       print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
       global g_kb_interrupt
       g_kb_interrupt = True
 
-    try:
-      server.serve_forever()
-    except KeyboardInterrupt:
-      server.socket.close()
 
   # ----------------------------------------------------------------------------
   # Counter
@@ -187,16 +189,17 @@ else:
       print('Web Server Address = %s' % g_HOST)
       print('Press CTRL+C to stop web server and exit.')
       print('-----------------------------------------')
+
+      try:
+        server.serve_forever()
+      except KeyboardInterrupt:
+        server.socket.close()
+
     except:
       print('-----------------------------------------')
       print('Error creating a socket. Please switch ON the device connected to Ethernet port or check if the IP address given is same as your computers static IP configuration of Wired connection.')
       global g_kb_interrupt
       g_kb_interrupt = True
-
-    try:
-      server.serve_forever()
-    except KeyboardInterrupt:
-      server.socket.close()
 
   # ----------------------------------------------------------------------------
   # Counter
