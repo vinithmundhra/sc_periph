@@ -104,11 +104,10 @@ Flash the Application:
 
 Demo:
 
-* Navigate to */app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver* in the *Terminal* or *Command Line*
-* Switch ON the power supply to sliceKIT A16 core board.
-* Within 5 seconds after switching ON the power supply to the core board, run the python script with the web server address (*Note:* administrator privileges may be required to run the ``server.py`` and ``test_client.py``.)
+* On the *Terminal* or *Command Line* navigate to *app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver*.
+* Run the Python script with the web server address (*Note:* administrator privileges may be required to run the ``server.py`` and ``test_client.py``.)
 
-     - For Windows: start command prompt as an administrator and then execute the python scripts.
+     - For Windows: start command prompt as an administrator and then execute the Python scripts.
 
      - For Mac / Linux: run the scripts with *sudo*.
 
@@ -118,9 +117,12 @@ Demo:
 
 * The following message is displayed in the Python console::
 
-   -----------------------------------------
-   Web Server Address = 169.254.202.189
-   Press CTRL+C to stop web server and exit.
+   Server: Waiting to start web server
+   Server: Press CTRL+C to exit.
+
+* Switch ON the power supply to sliceKIT A16 core board. The link will come up and the server will then start::
+
+   Server: Web server started with IP address = 169.254.202.189
    -----------------------------------------
 
 * Wait until the following message is displayed::
@@ -137,7 +139,7 @@ Demo:
 
    - move the Joystick to different positions
 
-* As and when the sensor (button clicks, joystick position) values change, the python console is updated with their values::
+* As and when the sensor (button clicks, joystick position) values change, the Python console is updated with their values::
 
    XMOS: Button = 000; Temperature = 124; Joystick X = 112, Y = 121
    XMOS: Button = 001; Temperature = 124; Joystick X = 112, Y = 121
@@ -157,7 +159,7 @@ Demo:
 
    XMOS: Going to sleep.
    -----------------------------------------
-   Expecting Wakeup in (seconds)...
+   Server: Client closed connection, expecting wakeup in 30 seconds...
    30
    29
 
@@ -167,7 +169,7 @@ Demo:
 
    - The internal sleep timer expires - currently set to 30 seconds
 
-* Meanwhile, the python server is waiting for the chip to wake up and request a new connection.
+* Meanwhile, the Python server is waiting for the chip to wake up and request a new connection.
 
 * Once woken up, the program will connect to the running web server, display the sensor data and go back to sleep.
 
