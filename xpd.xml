@@ -5,42 +5,42 @@
             <board>XA-SK-E100</board>
             <board>XA-SK-MIXED SIGNAL</board>
             <board>A16</board>
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.0">module_analog_tile_support</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_otp" version = "1.0.0">module_otp_board_info</componentDependency>
-            <componentDependency repo = "git://github.com/davelxmos/sc_xtcp" version = "3.1.5">module_xtcp</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_ethernet.git" version = "2.2.7">module_ethernet_smi</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_otp" version = "1.0.0">module_otp_board_info</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_ethernet.git" version = "2.2.7">module_ethernet</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_locks</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_otp" version = "1.0.0">module_otp_board_info</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_otp" version = "1.0.0">module_otp_board_info</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_ethernet.git" version = "2.2.7">module_ethernet_smi</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.1">module_analog_tile_support</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_locks</componentDependency>
+            <componentDependency repo = "git://github.com/davelxmos/sc_xtcp" version = "3.1.5">module_xtcp</componentDependency>
             <keyword>sleep</keyword>
         </component>
         <component description = "A simple demo of using the xCORE-USB ADC" type = "demoCode" scope = "Example" path = "app_adc_demo_u" local = "false" id = "app_adc_demo_u" name = "xCORE-USB ADC Demo">
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.0">module_usb_tile_support</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.1">module_usb_tile_support</componentDependency>
             <keyword>adc</keyword>
         </component>
         <component description = "Demo showing PWM DAC looping back into ADC using XS1-A16 slice kit core board and mixed signal slice" type = "demoCode" scope = "Example" path = "app_adc_pwm_demo_a" local = "false" id = "app_adc_pwm_demo_a" name = "PWM DAC to ADC analog loopback example">
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.0">module_analog_tile_support</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_pwm.git" version = "1.0.1">module_pwm_tutorial_example</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_periph.git" version = "1.1.1">module_analog_tile_support</componentDependency>
             <keyword>adc pwm loopback analog dac</keyword>
         </component>
         <component name = "xCORE-Analog Support Library" type = "component" buildresults_path = "module_analog_tile_support/.module_analog_tile_support.buildinfo" scope = "General Use" path = "module_analog_tile_support" metainfo_path = "module_analog_tile_support/module_analog_tile_support.metainfo" local = "false" id = "module_analog_tile_support" description = "Library providing support for xCORE-Analog (A-Series) XS1 devices.">
             <board></board>
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <keyword>adc wdt rtc sleep mode power peripherals</keyword>
         </component>
         <component name = "xCORE-USB Support Library" type = "component" buildresults_path = "module_usb_tile_support/.module_usb_tile_support.buildinfo" scope = "General Use" path = "module_usb_tile_support" metainfo_path = "module_usb_tile_support/module_usb_tile_support.metainfo" local = "false" id = "module_usb_tile_support" description = "Library providing support for xCORE-USB (U-Series) devices.">
-            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_logging</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_util" version = "1.0.3">module_xassert</componentDependency>
             <keyword>adc peripherals</keyword>
         </component>
     </components>
@@ -77,7 +77,8 @@
     <release parenthash = "35410976288936472fec0b8641a461732d8fa1b1" version = "1.0.0alpha0" githash = "2ea85c8ea7e33a0b6410521cfe24abc25671c9ae"></release>
     <release parenthash = "5c58f698049e2a84e3df4bbbe88bfecf8a4eb241" version = "1.0.0rc0" githash = "069980a1374cb56f655c79b57749caa62072cf08"></release>
     <release parenthash = "122d2d108788fe150af26d2dd3afed32c216dbb4" version = "1.1.0alpha0" githash = "be5b9490ca8ea2b4b0f5683649adf6e7f6716ca7"></release>
-    <release parenthash = "d5a5e2cd7b08f33125ed54aba4d6dc3ba4ea3b39" version = "1.1.1alpha0"></release>
+    <release parenthash = "d5a5e2cd7b08f33125ed54aba4d6dc3ba4ea3b39" version = "1.1.1alpha0" githash = "8cfbba13b03bc42778f07f55ac8e244bc50daea0"></release>
+    <release parenthash = "a438a24aa55c122f608ba1113c12ebd228c04aa8" version = "1.1.2alpha0"></release>
     <subpartnumber>XM-002790-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <version_defines></version_defines>

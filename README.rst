@@ -1,9 +1,10 @@
 Peripheral Tile Support Library
 ...............................
 
-:Latest release: 1.1.1alpha0
+:Latest release: 1.1.2alpha0
 :Maintainer: pthedinger
 :Description: Collection of functions to support peripheral tiles.
+
 
 
 
