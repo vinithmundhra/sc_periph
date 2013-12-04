@@ -73,7 +73,7 @@ Importing the A16 sliceKIT Ethernet sleep wake combo demo application:
 * Open the xTIMEcomposer Studio and ensure that it is operating in online mode.
 * Open the *Edit* perspective (Window -> Open Perspective -> XMOS Edit).
 * Open the *xSOFTip* view from (Window -> Show View -> xSOFTip). An *xSOFTip* window appears on the bottom-left.
-* Fine the *A16 sliceKIT Ethernet Sleep Wake Combo Demo*.
+* Find the *A16 sliceKIT Ethernet Sleep Wake Combo Demo*.
 * Click and drag it into the *Project Explorer* window. Doing this will open a *Import xTIMEcomposer Software* window. Click on *Finish* to download and complete the import.
 * This will also automatically import dependencies for this application.
 * The application is called as *app_a16_slicekit_ethernet_sleep_wake_combo_demo* in the *Project Explorer* window.
@@ -105,7 +105,7 @@ Flash the Application:
 Demo:
 
 * On the *Terminal* or *Command Line* navigate to *app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver*.
-* Run the Python script with the web server address (*Note:* administrator privileges may be required to run the ``server.py`` and ``test_client.py``.)
+* Run the Python script with the web server address (*Note:* administrator privileges may be required to run ``server.py``.)
 
      - For Windows: start command prompt as an administrator and then execute the Python scripts.
 
