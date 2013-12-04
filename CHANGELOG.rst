@@ -1,6 +1,10 @@
 In-Device Peripheral Library Change Log
 =======================================
 
+1.1.2
+-----
+  * Changed the demo app server to wait for the link to come up before starting.
+
 1.1.1
 -----
   * Refreshed code and documentation so it correctly references XP-SKC-A16 sliceKIT core board
