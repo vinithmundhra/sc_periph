@@ -41,6 +41,7 @@ g_start_counter = False
 g_sleep_time = 30
 g_temperature = 0
 g_program_running = False
+g_log_file = 'temperature.log'
 
 # Keyboard interrupt handler
 def kb_handler(signum, frame):
@@ -55,15 +56,13 @@ signal.signal(signal.SIGINT, kb_handler)
 def counter():
   global g_sleep_time
   global g_start_counter
-  global g_temperature
-  global g_program_running
 
   time_10s = 0
   old_temperature = 0
   timer_temperature = False
 
-  log = open('temperature.log', 'w')
-  log.write('Time Temperature\n')
+  log = open(g_log_file, 'w')
+  log.write('Time     Temperature\n')
 
   while True:
     time.sleep(1)
@@ -130,6 +129,7 @@ def start_server():
 
   PORT = 80
 
+  print('Server: Logging temperature data to %s' % g_log_file)
   print('Server: Waiting to start web server')
   print('Server: Press CTRL+C to exit.')
 

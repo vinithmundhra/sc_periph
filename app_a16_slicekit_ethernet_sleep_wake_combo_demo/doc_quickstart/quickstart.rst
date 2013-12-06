@@ -122,6 +122,7 @@ Demo:
 
 * The following message is displayed in the Python console::
 
+   Server: Logging temperature data to temperature.log
    Server: Waiting to start web server
    Server: Press CTRL+C to exit.
 
@@ -178,9 +179,9 @@ Demo:
 
 * Once woken up, the program will connect to the running web server, display the sensor data and go back to sleep.
 
-*Note:*
+* The Python server will log the temperature values to ``temperature.log``. It will write out a value every 10 seconds and every time the temperature changes.
 
-The button press count is stored in sleep memory. When the chip wakes up, the program will look in the sleep memory for valid data and continue counting button presses from the last value.
+*Note:* The button press count is stored in sleep memory. When the chip wakes up, the program will look in the sleep memory for valid data and continue counting button presses from the last value.
 
 Next Steps
 ++++++++++
@@ -191,5 +192,5 @@ Next Steps
 
    #define SLEEP_MILLISEC 30000
 
-  Try changing this to *60000* and note that the sleep time will now be increased to 60 seconds.
+  Try changing this to *60000* and note that the sleep time will now be increased to 60 seconds. This will cause the Python server to complain about the chip now waking up in time.
 
