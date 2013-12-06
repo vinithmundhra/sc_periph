@@ -112,7 +112,7 @@ class xmos_tcp_handler(socketserver.BaseRequestHandler):
           if line:
             print('XMOS: %s' % line)
             if 'Temperature' in line:
-              g_temperature = int(data[28:31])
+              g_temperature = int(line[28:31])
       else:
         g_sleep_time = 30
         print('-----------------------------------------')
