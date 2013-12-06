@@ -15,11 +15,6 @@ else:
   # Python version 3.x
   import socketserver
 
-# Global variables
-g_kb_interrupt = False
-g_start_counter = 0
-g_sleep_time = 30
-
 # Check for valid IP address
 def valid_ip(address):
   try:
@@ -40,6 +35,13 @@ except:
    print('Please enter a valid Web server IP address. Exiting!')
    exit(1)
 
+# Global variables
+g_kb_interrupt = False
+g_start_counter = False
+g_sleep_time = 30
+g_temperature = 0
+g_program_running = False
+
 # Keyboard interrupt handler
 def kb_handler(signum, frame):
     global g_kb_interrupt
@@ -53,19 +55,41 @@ signal.signal(signal.SIGINT, kb_handler)
 def counter():
   global g_sleep_time
   global g_start_counter
+  global g_temperature
+  global g_program_running
+
+  time_10s = 0
+  old_temperature = 0
+  timer_temperature = False
+
+  log = open('temperature.log', 'w')
+  log.write('Time Temperature\n')
 
   while True:
     time.sleep(1)
-    if g_start_counter == 1:
+    time_10s += 1
+
+    if g_start_counter:
       if g_sleep_time >= 0:
         print(g_sleep_time)
         g_sleep_time -= 1
       else:
         print('Server: Sleep time exceeded. The chip should have woken up by now!')
-        g_start_counter = 0
-    if g_kb_interrupt:
-      break
+        g_start_counter = False
 
+    else:
+      if time_10s >= 10:
+        timer_temperature = True
+
+      if ((g_temperature != old_temperature) or timer_temperature) and g_program_running:
+        old_temperature = g_temperature
+        time_10s = 0
+        timer_temperature = False
+        log.write(time.strftime('%H:%M:%S') + ' ' + str(g_temperature) + '\n')
+
+    if g_kb_interrupt:
+      log.close()
+      break
 
 # ----------------------------------------------------------------------------
 # The TCP handler - receive data from the device and print it on the console
@@ -76,21 +100,26 @@ class xmos_tcp_handler(socketserver.BaseRequestHandler):
 
     global g_start_counter
     global g_sleep_time
+    global g_temperature
+    global g_program_running
 
     while True:
       data = self.request.recv(1024).decode()
-      g_start_counter = 0
+      g_start_counter = False
+      g_program_running = True
       if data:
         for line in data.split('\n'):
           if line:
             print('XMOS: %s' % line)
+            if 'Temperature' in line:
+              g_temperature = int(data[28:31])
       else:
         g_sleep_time = 30
         print('-----------------------------------------')
         print('Server: Client closed connection, expecting wakeup in %d seconds...' %
             g_sleep_time)
         self.request.close()
-        g_start_counter = 1
+        g_start_counter = True
         break
 
 # ----------------------------------------------------------------------------
