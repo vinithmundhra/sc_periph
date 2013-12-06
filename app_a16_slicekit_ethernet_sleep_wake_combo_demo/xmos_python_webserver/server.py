@@ -86,6 +86,7 @@ def counter():
         time_10s = 0
         timer_temperature = False
         log.write(time.strftime('%H:%M:%S') + ' ' + str(g_temperature) + '\n')
+        log.flush()
 
     if g_kb_interrupt:
       log.close()
