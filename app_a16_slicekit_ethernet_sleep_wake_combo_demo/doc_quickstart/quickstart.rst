@@ -192,5 +192,5 @@ Next Steps
 
    #define SLEEP_MILLISEC 30000
 
-  Try changing this to *60000* and note that the sleep time will now be increased to 60 seconds. This will cause the Python server to complain about the chip now waking up in time.
+  Try changing this to *60000* and note that the sleep time will now be increased to 60 seconds. This will cause the Python server to complain about the chip not waking up in time.
 

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<?fileVersion 4.0.0?>
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
     <storageModule moduleId="org.eclipse.cdt.core.settings">
-              
         <cconfiguration id="com.xmos.cdt.toolchain.40651297">
             <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xmos.cdt.toolchain.40651297" moduleId="org.eclipse.cdt.core.settings" name="Default">
                 <externalSettings />
                 <extensions>
-                    <extension id="com.xmos.cdt.core.XEBinaryParser" point="org.eclipse.cdt.core.BinaryParser" />
                     <extension id="com.xmos.cdt.core.XdeErrorParser" point="org.eclipse.cdt.core.ErrorParser" />
                     <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser" />
+					<extension id="com.xmos.cdt.core.XEBinaryParser" point="org.eclipse.cdt.core.BinaryParser"/>
                 </extensions>
             </storageModule>
             <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
                 <buildTargets>
                     <target name="all" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
                         <buildCommand>xmake</buildCommand>
-                        <buildArguments></buildArguments>
+						<buildArguments/>
                         <buildTarget>all</buildTarget>
                         <stopOnError>true</stopOnError>
                         <useDefaultCommand>true</useDefaultCommand>
@@ -24,7 +22,7 @@
                     </target>
                     <target name="clean" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
                         <buildCommand>xmake</buildCommand>
-                        <buildArguments></buildArguments>
+						<buildArguments/>
                         <buildTarget>clean</buildTarget>
                         <stopOnError>true</stopOnError>
                         <useDefaultCommand>true</useDefaultCommand>
@@ -156,35 +154,41 @@
 								<option id = "com.xmos.xc.compiler.option.include.paths.58474049" name="com.xmos.xc.compiler.option.include.paths" superClass="com.xmos.xc.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
-                                    <listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/common}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/full}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/include}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/lite}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp}&quot;' />
-
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/full}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/lite}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/doc}&quot;"/>
 								</option>
 								<inputType id = "com.xmos.cdt.xc.compiler.input.22583253" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
                             </tool>
@@ -295,35 +299,41 @@
 								<option id = "com.xmos.c.compiler.option.include.paths.53099515" name="com.xmos.c.compiler.option.include.paths" superClass="com.xmos.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
-                                    <listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/common}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/full}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/include}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/lite}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp}&quot;' />
-
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/full}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/lite}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/doc}&quot;"/>
 								</option>
 								<inputType id = "com.xmos.cdt.c.compiler.input.c.6403995" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -440,43 +450,48 @@
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/c++/4.2.1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/c++/4.2.1/xcore-xmos-elf&quot;"/>
-                                    <listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_analog_tile_support}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/common}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/full}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/include}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src/lite}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet_smi}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_ethernet}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_locks}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_logging}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_otp_board_info}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xassert}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp/src}&quot;' />
-<listOptionValue builtIn="false" value='&quot;${workspace_loc:/module_xtcp}&quot;' />
-
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_a16_slicekit_ethernet_sleep_wake_combo_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/full}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src/lite}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet_smi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/autoip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/dhcpc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip/igmp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src/xtcp_uip}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xtcp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_otp_board_info/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_xassert/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_logging/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_locks/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_ethernet/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_analog_tile_support/doc}&quot;"/>
 								</option>
 								<inputType id = "com.xmos.cdt.cxx.compiler.input.cpp.49510690" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry excluding=".build_*" flags="VALUE_WORKSPACE_PATH|RESOLVED"
-                    kind="sourcePath" name="" />
+						<entry excluding=".build_*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>
@@ -538,7 +553,7 @@
                         <parser enabled="true" />
                     </buildOutputProvider>
                     <scannerInfoProvider id="specsFile">
-                        <runAction arguments='-c &apos;gcc -E -P -v -dD &quot;${plugin_state_location}/${specs_file}&quot;&apos;' command="sh" useDefault="true" />
+						<runAction arguments="-c 'gcc -E -P -v -dD &quot;${plugin_state_location}/${specs_file}&quot;'" command="sh" useDefault="true"/>
                         <parser enabled="true" />
                     </scannerInfoProvider>
                 </profile>
@@ -548,7 +563,7 @@
                         <parser enabled="true" />
                     </buildOutputProvider>
                     <scannerInfoProvider id="specsFile">
-                        <runAction arguments='-c &apos;g++ -E -P -v -dD &quot;${plugin_state_location}/specs.cpp&quot;&apos;' command="sh" useDefault="true" />
+						<runAction arguments="-c 'g++ -E -P -v -dD &quot;${plugin_state_location}/specs.cpp&quot;'" command="sh" useDefault="true"/>
                         <parser enabled="true" />
                     </scannerInfoProvider>
                 </profile>
@@ -558,7 +573,7 @@
                         <parser enabled="true" />
                     </buildOutputProvider>
                     <scannerInfoProvider id="specsFile">
-                        <runAction arguments='-c &apos;gcc -E -P -v -dD &quot;${plugin_state_location}/specs.c&quot;&apos;' command="sh" useDefault="true" />
+						<runAction arguments="-c 'gcc -E -P -v -dD &quot;${plugin_state_location}/specs.c&quot;'" command="sh" useDefault="true"/>
                         <parser enabled="true" />
                     </scannerInfoProvider>
                 </profile>
@@ -567,7 +582,6 @@
             <storageModule moduleId="org.eclipse.cdt.core.language.mapping" />
             <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings" />
         </cconfiguration>
-
     </storageModule>
     <storageModule moduleId="cdtBuildSystem" version="4.0.0">
         <project id = "app_a16_slicekit_ethernet_sleep_wake_combo_demo.null.64763715" name="app_a16_slicekit_ethernet_sleep_wake_combo_demo" />

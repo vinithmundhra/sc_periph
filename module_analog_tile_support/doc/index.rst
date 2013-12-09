@@ -1,5 +1,5 @@
-XMOS Analog Tile Peripheral Support Library
-===========================================
+xCORE-Analog Support Library
+============================
 
 .. toctree::
 

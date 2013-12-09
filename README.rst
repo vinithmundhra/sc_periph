@@ -5,13 +5,8 @@ Peripheral Tile Support Library
 :Maintainer: pthedinger
 :Description: Collection of functions to support peripheral tiles.
 
-
-
-
-
 The Peripheral Tile Support Library provides a set of functions and 
 datatypes which aid the use of the peripheral tiles.
-
 
 Key Features
 ============
@@ -28,28 +23,17 @@ module_analog_tile_support:
 * Support for A-Series Watchdog Timer (WDT)
 * Library functions supporting sleep mode and the Real Time Clock (RTC)
 
-
-
 Known Issues
 ============
 
 None.
 
-      
 Support
 =======
 
-Issues may be submitted via the Issues tab in this github repo. Response to any
-issues submitted as at the discretion of the maintainer for this line.
-
+Issues may be submitted via xCORE.com.
 
 Required software (dependencies)
 ================================
 
-  * sc_xtcp (https://github.com/xcore/sc_xtcp.git)
-  * sc_ethernet (git@github.com:xcore/sc_ethernet.git)
-  * sc_pwm (https://github.com/xcore/sc_pwm.git)
-  * sc_slicekit_support (git@github.com:xcore/sc_slicekit_support)
-  * sc_otp (git@github.com:xcore/sc_otp)
-  * sc_util (git://github.com/xcore/sc_util)
-
+All required dependencies will be downloaded automatically when an application in this repository is imported into the project workspace using xTIMEcomposer Studio.
