@@ -1,5 +1,5 @@
 
-Analog tile API Programming Guide
+Analog tile API programming guide
 =================================
 
 This section provides information on how to program applications using the Analog Tile module.
@@ -7,7 +7,7 @@ This section provides information on how to program applications using the Analo
 Source code structure
 ---------------------
 
-Directory Structure
+Directory structure
 +++++++++++++++++++
 
 A typical application using the analog tile support library will have at least two top level directories. The application will be contained in a directory starting with ``app_``, the analog tile support module source is in the ``module_analog_tile_support`` directory which contains library files required to build the application::
@@ -17,7 +17,7 @@ A typical application using the analog tile support library will have at least t
 
 Of course the application may use other modules which can also be directories at this level. The modules compiled into the application are set by the ``USED_MODULES`` define in the application Makefile.
 
-Key Files
+Key files
 +++++++++
 
 The following header file contains prototypes of all functions required to use the LIN Bus 
@@ -33,7 +33,7 @@ module. The API is described in :ref:`sec_api`.
 
 The header file ``analog_tile_support.h`` includes the header files ``at_adc.h``, ``at_wdt.h`` and ``at_sleep.h``. If you are only calling sleep functions and not referencing the watchdog time and ADC, for example, it is OK to only include ``at_sleep.h``.
 
-Module Usage
+Module usage
 ------------
 
 Using the ADC
@@ -71,7 +71,7 @@ The minimal example below shows one ADC channel being configured and enabled (AD
   }
  
 
-Using Sleep Mode
+Using sleep mode
 ++++++++++++++++
 
 Sleep mode is a deep low power mode provided by the XS1-A series devices. In addition to low power modes within the xCORE such as Active Energy Conservation which allow figures of 10s of milliwatts, sleep mode allows a very low power state drawing hundreds of microwatts.
@@ -98,7 +98,7 @@ In addition to sleep function, the chip also supports an RTC. Because xCORE devi
 More detailed examples and use of sleep memory, as well as the RTC, can be found in the test and ``Example Applications`` section of this document and within the source tree.
 
 	
-Using the Watchdog Timer
+Using the Watchdog timer
 ++++++++++++++++++++++++
 
 The Watchdog Timer provides a hardware mechanism to reset the xCORE should a software crash/lockup occur. The main application loop periodically "kicks" (resets) the WDT under normal operation.  The timeout period should be set higher than the typical loop speed, preventing reset under normal operation. The WDT API uses milliseconds as the time base and can support up to about a minute for before timeout.
@@ -120,7 +120,7 @@ The below example shows a minimal code snippet for configuring the WDT to reset 
   }				
 
 
-Software Requirements
+Software requirements
 ---------------------
 
-This library is built with xTIMEcomposer Tools version 13.0.0. It can be used in version 13.0.0 or any higher version of xTIMEcomposer Tools.
+This library is built with xTIMEcomposer Tools version 13.0.0 (Community or Enterprise) or higher.

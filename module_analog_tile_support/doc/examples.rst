@@ -1,29 +1,26 @@
 
-Example Applications
+Example applications
 ====================
 
-Demo Applications
------------------
+ADC to PWM demo
+---------------
 
-ADC to PWM Demo
-+++++++++++++++
-
-This simple application shows how the ADC can be used in conduction with a PWM generator (with filtered output) to create an analog loopback. An analog joystick provides a reference for an ADC input. The read value is then used to generate a PWM value, the filter output from which is read by a second ADC channel. Both values are displayed to observe if they track.
+This simple application shows how the ADC can be used in conjunction with a PWM generator (with filtered output) to create an analog loopback. An analog joystick provides a reference for an ADC input. The read value is then used to generate a PWM value, the filter output from which is read by a second ADC channel. Both values are displayed to observe if they track.
 
    * Package: sc_periph
    * Application: app_pwm_demo_a
 
-Low-Power Ethernet Client Demo
-++++++++++++++++++++++++++++++
+Low-Power Ethernet client demo
+------------------------------
 
-This is demo uses the Sleep and Wake feature of A series XMOS devices. In this demo, a webclient running on the XMOS device informs a webserver running on a host workstation when it is going to sleep and has woken up from sleep. The XMOS device can be woken up using a periodic timer or pin connected to a comparator output from an LDR (light dependent resistor).
+This demo uses the sleep and wake feature of A series XMOS devices. In this demo, a webclient running on the XMOS device informs a webserver running on a host workstation when it is going to sleep and has woken up from sleep. The XMOS device can be woken up using a periodic timer or pin connected to a comparator output from an LDR (light dependent resistor).
 
    * Package: sc_periph
    * Application: app_a16_slicekit_ethernet_sleep_wake_combo_demo
 
    ++Note to demonstrate entry AND exit from sleep mode, it is necessary to flash the application rather than just load it into RAM. This is because sleep mode removes the power from the xCORE and exit from sleep mode is a reset. Therefore to continue executing, the chip needs to boot from flash again.
 
-Test Applications
+Test applications
 -----------------
 
 A number of test applications are included for completeness. Whilst not designed to be tutorial code, they may be useful to understand the library and chip capability, so are included for reference.
@@ -42,5 +39,3 @@ tests/test_wdt_a
 ++++++++++++++++
 
 Tests the operation of the WDT. Checks that the timer is accurate relative the xCORE reference clock and checks the API functions.
-
- 
